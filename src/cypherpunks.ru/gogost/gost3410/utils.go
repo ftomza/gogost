@@ -21,9 +21,7 @@ import (
 )
 
 func bytes2big(d []byte) *big.Int {
-	n := big.NewInt(0)
-	n.SetBytes(d)
-	return n
+	return big.NewInt(0).SetBytes(d)
 }
 
 func reverse(d []byte) {

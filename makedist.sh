@@ -24,7 +24,7 @@ find . -name .git -type d | xargs rm -fr
 rm -fr www* makedist* TODO src/golang.org $tmp/includes
 
 cd ..
-tar cvf gogost-"$release".tar gogost-"$release"
+tar cvf gogost-"$release".tar --uid=0 --gid=0 --numeric-owner gogost-"$release"
 xz -9 gogost-"$release".tar
 gpg --detach-sign --sign --local-user 82343436696FC85A gogost-"$release".tar.xz
 

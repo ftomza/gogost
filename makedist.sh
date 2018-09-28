@@ -57,8 +57,6 @@ The main improvements for that release are:
 ------------------------ >8 ------------------------
 
 GoGOST'es home page is: http://gogost.cypherpunks.ru/
-Also available as I2P service:
-http://a5zmymxbjreuvbftgzmu64vcw2ssa3s44c2dn2jryxee6utn34qa.b32.i2p/
 
 Source code and its signature for that version can be found here:
 
@@ -91,8 +89,6 @@ GoGOST это свободное программное обеспечение �
 ------------------------ >8 ------------------------
 
 Домашняя страница GoGOST: http://gogost.cypherpunks.ru/
-Также доступная как I2P сервис:
-http://a5zmymxbjreuvbftgzmu64vcw2ssa3s44c2dn2jryxee6utn34qa.b32.i2p/
 
 Исходный код и его подпись для этой версии могут быть найдены здесь:
 

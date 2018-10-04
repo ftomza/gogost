@@ -169,7 +169,6 @@ uid   GoGOST releases <gogost at cypherpunks dot ru>
 % gpg --keyserver hkp://keys.gnupg.net/ --recv-keys 0x82343436696FC85A
 % gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
 % gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
-% gpg --auto-key-locate pka --locate-keys gogost at cypherpunks dot ru
 @end verbatim
 
 @item

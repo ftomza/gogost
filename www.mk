@@ -2,7 +2,7 @@ all: gogost.html
 
 MAKEINFO ?= makeinfo
 
-gogost.html: www.texi
+gogost.html: *.texi
 	rm -f gogost.html/*.html
 	$(MAKEINFO) --html \
 		--set-customization-variable NO_CSS=1 \

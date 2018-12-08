@@ -2,10 +2,12 @@ all: gogost.html
 
 MAKEINFO ?= makeinfo
 
+CSS != cat style.css
+
 gogost.html: *.texi
 	rm -f gogost.html/*.html
 	$(MAKEINFO) --html \
-		--set-customization-variable NO_CSS=1 \
+		--set-customization-variable CSS_LINES='$(CSS)' \
 		--set-customization-variable SHOW_TITLE=0 \
 		--set-customization-variable USE_ACCESSKEY=0 \
 		--set-customization-variable DATE_IN_HEADER=1 \

@@ -29,7 +29,7 @@ xz -9 gogost-"$release".tar
 gpg --detach-sign --sign --local-user 82343436696FC85A gogost-"$release".tar.xz
 
 tarball=gogost-"$release".tar.xz
-size=$(( $(wc -c < $tarball) / 1024 ))
+size=$(( $(stat -f %z $tarball) / 1024 ))
 hash=$(gpg --print-md SHA256 < $tarball)
 hashsb=$($HOME/work/gogost/streebog256 < $tarball)
 release_date=$(date "+%Y-%m-%d")

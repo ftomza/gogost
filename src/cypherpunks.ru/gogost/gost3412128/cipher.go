@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // GOST 34.12-2015 128-bit (Кузнечик (Kuznechik)) block cipher.
-package gost3412
+package gost3412128
 
 const (
 	BlockSize = 16

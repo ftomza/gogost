@@ -68,6 +68,8 @@ func TestVectors(t *testing.T) {
 	}
 
 	// Second vector
+	// It is CP1251-encoded "Се ветри, Стрибожи внуци, веютъ с моря
+	// стрелами на храбрыя плъкы Игоревы" string
 	h512.Reset()
 	h256.Reset()
 	m = []byte{

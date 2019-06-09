@@ -19,6 +19,8 @@
 package gost34112012256
 
 import (
+	"hash"
+
 	"cypherpunks.ru/gogost/internal/gost34112012"
 )
 
@@ -27,6 +29,6 @@ const (
 	Size      = 32
 )
 
-func New() *gost34112012.Hash {
+func New() hash.Hash {
 	return gost34112012.New(32)
 }

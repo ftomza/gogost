@@ -48,6 +48,5 @@ resources.
     uid   GoGOST releases <gogost at cypherpunks dot ru>
 
     Look in PUBKEY.asc file.
-    % gpg --keyserver hkp://keys.gnupg.net/ --recv-keys 0x82343436696FC85A
     % gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
     % gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru

@@ -3,6 +3,47 @@
 
 @table @strong
 
+@anchor{Release 3.0}
+@item 3.0
+    @itemize
+    @item Multilinear Galois Mode (MGM) block cipher mode for
+      64 and 128 bit ciphers
+    @item @code{KDF_GOSTR3411_2012_256} KDF
+    @item 34.12-2015 64-bit block cipher Магма (Magma)
+    @item Additional EAC 28147-89 Sbox
+    @item 34.10-2012 TC26 twisted Edwards curve related parameters
+    @item Coordinates conversion from twisted Edwards to Weierstrass
+      form and vice versa
+    @item Fixed @code{gost3410.PrivateKey}'s length validation
+    @item Backward incompatible change: @code{gost3410.NewCurve} takes
+      @code{big.Int}, instead of encoded integers
+    @item Backward incompatible Sbox and curves parameters renaming, to
+      comply with OIDs identifying them:
+@verbatim
+      Gost2814789_TestParamSet       -> SboxIdGost2814789TestParamSet
+      Gost28147_CryptoProParamSetA   -> SboxIdGost2814789CryptoProAParamSet
+      Gost28147_CryptoProParamSetB   -> SboxIdGost2814789CryptoProBParamSet
+      Gost28147_CryptoProParamSetC   -> SboxIdGost2814789CryptoProCParamSet
+      Gost28147_CryptoProParamSetD   -> SboxIdGost2814789CryptoProDParamSet
+      GostR3411_94_TestParamSet      -> SboxIdGostR341194TestParamSet
+      Gost28147_tc26_ParamZ          -> SboxIdtc26gost28147paramZ
+      GostR3411_94_CryptoProParamSet -> SboxIdGostR341194CryptoProParamSet
+      EACParamSet                    -> SboxEACParamSet
+
+      CurveParamsGostR34102001cc            -> CurveGostR34102001ParamSetcc
+      CurveParamsGostR34102001Test          -> CurveIdGostR34102001TestParamSet
+      CurveParamsGostR34102001CryptoProA    -> CurveIdGostR34102001CryptoProAParamSet
+      CurveParamsGostR34102001CryptoProB    -> CurveIdGostR34102001CryptoProBParamSet
+      CurveParamsGostR34102001CryptoProC    -> CurveIdGostR34102001CryptoProCParamSet
+      CurveParamsGostR34102001CryptoProXchA -> CurveIdGostR34102001CryptoProXchAParamSet
+      CurveParamsGostR34102001CryptoProXchB -> CurveIdGostR34102001CryptoProXchBParamSet
+      CurveParamsGostR34102012TC26ParamSetA -> CurveIdtc26gost341012512paramSetA
+      CurveParamsGostR34102012TC26ParamSetB -> CurveIdtc26gost341012512paramSetB
+@end verbatim
+    @item Various additional test vectors
+    @item go modules friendliness
+    @end itemize
+
 @anchor{Release 2.0}
 @item 2.0
     @itemize

@@ -24,7 +24,7 @@ import (
 )
 
 func TestVKO2001(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102001Test)
+	c := CurveIdGostR34102001TestParamSet()
 	ukmRaw, _ := hex.DecodeString("5172be25f852a233")
 	ukm := NewUKM(ukmRaw)
 	prvRaw1, _ := hex.DecodeString("1df129e43dab345b68f6a852f4162dc69f36b2f84717d08755cc5c44150bf928")
@@ -45,7 +45,7 @@ func TestVKO2001(t *testing.T) {
 }
 
 func TestRandomVKO2001(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102001Test)
+	c := CurveIdGostR34102001TestParamSet()
 	f := func(prvRaw1 [32]byte, prvRaw2 [32]byte, ukmRaw [8]byte) bool {
 		prv1, err := NewPrivateKey(c, Mode2001, prvRaw1[:])
 		if err != nil {

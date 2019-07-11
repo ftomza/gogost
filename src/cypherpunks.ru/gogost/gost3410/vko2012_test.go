@@ -24,7 +24,7 @@ import (
 )
 
 func TestVKO2012256(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	ukmRaw, _ := hex.DecodeString("1d80603c8544c727")
 	ukm := NewUKM(ukmRaw)
 	prvRawA, _ := hex.DecodeString("c990ecd972fce84ec4db022778f50fcac726f46708384b8d458304962d7147f8c2db41cef22c90b102f2968404f9b9be6d47c79692d81826b32b8daca43cb667")
@@ -47,7 +47,7 @@ func TestVKO2012256(t *testing.T) {
 }
 
 func TestRandomVKO2012256(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	f := func(prvRaw1 [64]byte, prvRaw2 [64]byte, ukmRaw [8]byte) bool {
 		prv1, err := NewPrivateKey(c, Mode2012, prvRaw1[:])
 		if err != nil {
@@ -70,7 +70,7 @@ func TestRandomVKO2012256(t *testing.T) {
 }
 
 func TestVKO2012512(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	ukmRaw, _ := hex.DecodeString("1d80603c8544c727")
 	ukm := NewUKM(ukmRaw)
 	prvRawA, _ := hex.DecodeString("c990ecd972fce84ec4db022778f50fcac726f46708384b8d458304962d7147f8c2db41cef22c90b102f2968404f9b9be6d47c79692d81826b32b8daca43cb667")
@@ -93,7 +93,7 @@ func TestVKO2012512(t *testing.T) {
 }
 
 func TestRandomVKO2012512(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	f := func(prvRaw1 [64]byte, prvRaw2 [64]byte, ukmRaw [8]byte) bool {
 		prv1, err := NewPrivateKey(c, Mode2012, prvRaw1[:])
 		if err != nil {

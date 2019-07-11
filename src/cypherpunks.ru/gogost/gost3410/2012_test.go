@@ -175,7 +175,7 @@ func TestGCL3Vectors(t *testing.T) {
 }
 
 func TestRandom2012(t *testing.T) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	f := func(data [31]byte, digest [64]byte) bool {
 		prv, err := NewPrivateKey(
 			c,
@@ -210,7 +210,7 @@ func TestRandom2012(t *testing.T) {
 }
 
 func BenchmarkSign2012(b *testing.B) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	prv, err := GenPrivateKey(c, Mode2012, rand.Reader)
 	if err != nil {
 		b.FailNow()
@@ -224,7 +224,7 @@ func BenchmarkSign2012(b *testing.B) {
 }
 
 func BenchmarkVerify2012(b *testing.B) {
-	c, _ := NewCurveFromParams(CurveParamsGostR34102012TC26ParamSetA)
+	c := CurveIdtc26gost341012512paramSetA()
 	prv, err := GenPrivateKey(c, Mode2012, rand.Reader)
 	if err != nil {
 		b.FailNow()

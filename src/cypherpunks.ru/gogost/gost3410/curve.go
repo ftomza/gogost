@@ -67,11 +67,10 @@ func NewCurve(p, q, a, b, bx, by []byte) (*Curve, error) {
 	r2.Mul(r2, c.X)
 	r2.Add(r2, c.B)
 	r2.Mod(r2, c.P)
-	if r2.Cmp(big.NewInt(0)) == -1 {
-		r2.Add(r2, c.P)
-	}
+	c.pos(r2)
 	if r1.Cmp(r2) != 0 {
 		return nil, errors.New("Invalid curve parameters")
+	}
 	}
 	return &c, nil
 }

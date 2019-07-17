@@ -142,7 +142,14 @@ func TestGCL3Vectors(t *testing.T) {
 		0x60, 0xC9, 0x3B, 0xCB, 0xCD, 0x9C, 0x5C, 0x33,
 		0x17, 0xE1, 0x93, 0x44, 0xE1, 0x73, 0xAE, 0x36,
 	}
-	c, err := NewCurve(p, q, a, b, x, y)
+	c, err := NewCurve(
+		bytes2big(p),
+		bytes2big(q),
+		bytes2big(a),
+		bytes2big(b),
+		bytes2big(x),
+		bytes2big(y),
+	)
 	if err != nil {
 		t.FailNow()
 	}

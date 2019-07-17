@@ -46,14 +46,14 @@ type Curve struct {
 	ty *big.Int
 }
 
-func NewCurve(p, q, a, b, bx, by []byte) (*Curve, error) {
+func NewCurve(p, q, a, b, x, y *big.Int) (*Curve, error) {
 	c := Curve{
-		P:  bytes2big(p[:]),
-		Q:  bytes2big(q[:]),
-		A:  bytes2big(a[:]),
-		B:  bytes2big(b[:]),
-		Bx: bytes2big(bx[:]),
-		By: bytes2big(by[:]),
+		P:  p,
+		Q:  q,
+		A:  a,
+		B:  b,
+		X:  x,
+		Y:  y,
 		t:  big.NewInt(0),
 		tx: big.NewInt(0),
 		ty: big.NewInt(0),

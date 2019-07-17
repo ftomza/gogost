@@ -21,14 +21,14 @@ import (
 )
 
 func (prv *PrivateKey) KEK(pub *PublicKey, ukm *big.Int) ([]byte, error) {
-	keyX, keyY, err := prv.c.Exp(prv.key, pub.x, pub.y)
+	keyX, keyY, err := prv.C.Exp(prv.Key, pub.X, pub.Y)
 	if err != nil {
 		return nil, err
 	}
-	keyX, keyY, err = prv.c.Exp(ukm, keyX, keyY)
+	keyX, keyY, err = prv.C.Exp(ukm, keyX, keyY)
 	if err != nil {
 		return nil, err
 	}
-	pk := PublicKey{prv.c, prv.mode, keyX, keyY}
+	pk := PublicKey{prv.C, prv.Mode, keyX, keyY}
 	return pk.Raw(), nil
 }

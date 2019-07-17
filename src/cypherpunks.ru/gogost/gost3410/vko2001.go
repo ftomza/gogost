@@ -27,7 +27,7 @@ import (
 // RFC 4357 VKO GOST R 34.10-2001 key agreement function.
 // UKM is user keying material, also called VKO-factor.
 func (prv *PrivateKey) KEK2001(pub *PublicKey, ukm *big.Int) ([]byte, error) {
-	if prv.mode != Mode2001 {
+	if prv.Mode != Mode2001 {
 		return nil, errors.New("KEK2001 can not be used in Mode2012")
 	}
 	key, err := prv.KEK(pub, ukm)

@@ -22,10 +22,10 @@ import (
 )
 
 type PublicKey struct {
-	c    *Curve
-	mode Mode
-	x    *big.Int
-	y    *big.Int
+	C    *Curve
+	Mode Mode
+	X    *big.Int
+	Y    *big.Int
 }
 
 func NewPublicKey(curve *Curve, mode Mode, raw []byte) (*PublicKey, error) {
@@ -46,61 +46,61 @@ func NewPublicKey(curve *Curve, mode Mode, raw []byte) (*PublicKey, error) {
 
 func (pub *PublicKey) Raw() []byte {
 	raw := append(
-		pad(pub.y.Bytes(), int(pub.mode)),
-		pad(pub.x.Bytes(), int(pub.mode))...,
+		pad(pub.Y.Bytes(), int(pub.Mode)),
+		pad(pub.X.Bytes(), int(pub.Mode))...,
 	)
 	reverse(raw)
 	return raw
 }
 
 func (pub *PublicKey) VerifyDigest(digest, signature []byte) (bool, error) {
-	if len(signature) != 2*int(pub.mode) {
+	if len(signature) != 2*int(pub.Mode) {
 		return false, errors.New("Invalid signature length")
 	}
-	s := bytes2big(signature[:pub.mode])
-	r := bytes2big(signature[pub.mode:])
-	if r.Cmp(zero) <= 0 || r.Cmp(pub.c.Q) >= 0 || s.Cmp(zero) <= 0 || s.Cmp(pub.c.Q) >= 0 {
+	s := bytes2big(signature[:pub.Mode])
+	r := bytes2big(signature[pub.Mode:])
+	if r.Cmp(zero) <= 0 || r.Cmp(pub.C.Q) >= 0 || s.Cmp(zero) <= 0 || s.Cmp(pub.C.Q) >= 0 {
 		return false, nil
 	}
 	e := bytes2big(digest)
-	e.Mod(e, pub.c.Q)
+	e.Mod(e, pub.C.Q)
 	if e.Cmp(zero) == 0 {
 		e = big.NewInt(1)
 	}
 	v := big.NewInt(0)
-	v.ModInverse(e, pub.c.Q)
+	v.ModInverse(e, pub.C.Q)
 	z1 := big.NewInt(0)
 	z2 := big.NewInt(0)
 	z1.Mul(s, v)
-	z1.Mod(z1, pub.c.Q)
+	z1.Mod(z1, pub.C.Q)
 	z2.Mul(r, v)
-	z2.Mod(z2, pub.c.Q)
-	z2.Sub(pub.c.Q, z2)
-	p1x, p1y, err := pub.c.Exp(z1, pub.c.Bx, pub.c.By)
+	z2.Mod(z2, pub.C.Q)
+	z2.Sub(pub.C.Q, z2)
+	p1x, p1y, err := pub.C.Exp(z1, pub.C.X, pub.C.Y)
 	if err != nil {
 		return false, err
 	}
-	q1x, q1y, err := pub.c.Exp(z2, pub.x, pub.y)
+	q1x, q1y, err := pub.C.Exp(z2, pub.X, pub.Y)
 	if err != nil {
 		return false, err
 	}
 	lm := big.NewInt(0)
 	lm.Sub(q1x, p1x)
 	if lm.Cmp(zero) < 0 {
-		lm.Add(lm, pub.c.P)
+		lm.Add(lm, pub.C.P)
 	}
-	lm.ModInverse(lm, pub.c.P)
+	lm.ModInverse(lm, pub.C.P)
 	z1.Sub(q1y, p1y)
 	lm.Mul(lm, z1)
-	lm.Mod(lm, pub.c.P)
+	lm.Mod(lm, pub.C.P)
 	lm.Mul(lm, lm)
-	lm.Mod(lm, pub.c.P)
+	lm.Mod(lm, pub.C.P)
 	lm.Sub(lm, p1x)
 	lm.Sub(lm, q1x)
-	lm.Mod(lm, pub.c.P)
+	lm.Mod(lm, pub.C.P)
 	if lm.Cmp(zero) < 0 {
-		lm.Add(lm, pub.c.P)
+		lm.Add(lm, pub.C.P)
 	}
-	lm.Mod(lm, pub.c.Q)
+	lm.Mod(lm, pub.C.Q)
 	return lm.Cmp(r) == 0, nil
 }

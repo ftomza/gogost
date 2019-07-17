@@ -29,14 +29,16 @@ var (
 )
 
 type Curve struct {
-	P *big.Int
-	Q *big.Int
+	P *big.Int // Characteristic of the underlying prime field
+	Q *big.Int // Elliptic curve subgroup order
+
+	// Equation coefficients of the elliptic curve in canonical form
 	A *big.Int
 	B *big.Int
 
 	// Basic point X and Y coordinates
-	Bx *big.Int
-	By *big.Int
+	X *big.Int
+	Y *big.Int
 
 	// Temporary variable for the add method
 	t  *big.Int
@@ -58,11 +60,11 @@ func NewCurve(p, q, a, b, bx, by []byte) (*Curve, error) {
 	}
 	r1 := big.NewInt(0)
 	r2 := big.NewInt(0)
-	r1.Mul(c.By, c.By)
+	r1.Mul(c.Y, c.Y)
 	r1.Mod(r1, c.P)
-	r2.Mul(c.Bx, c.Bx)
+	r2.Mul(c.X, c.X)
 	r2.Add(r2, c.A)
-	r2.Mul(r2, c.Bx)
+	r2.Mul(r2, c.X)
 	r2.Add(r2, c.B)
 	r2.Mod(r2, c.P)
 	if r2.Cmp(big.NewInt(0)) == -1 {

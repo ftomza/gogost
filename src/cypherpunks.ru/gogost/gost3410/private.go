@@ -33,8 +33,9 @@ func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
 		errors.New("Invalid private key length")
 	}
 	key := make([]byte, int(mode))
-	copy(key, raw)
-	reverse(key)
+	for i := 0; i < len(key); i++ {
+		key[i] = raw[len(raw)-i-1]
+	}
 	k := bytes2big(key)
 	if k.Cmp(zero) == 0 {
 		return nil, errors.New("Zero private key")

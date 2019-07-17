@@ -29,12 +29,13 @@ type PublicKey struct {
 }
 
 func NewPublicKey(curve *Curve, mode Mode, raw []byte) (*PublicKey, error) {
-	if len(raw) != 2*int(mode) {
+	key := make([]byte, 2*int(mode))
+	if len(raw) != len(key) {
 		return nil, errors.New("Invalid public key length")
 	}
-	key := make([]byte, 2*int(mode))
-	copy(key, raw)
-	reverse(key)
+	for i := 0; i < len(key); i++ {
+		key[i] = raw[len(raw)-i-1]
+	}
 	return &PublicKey{
 		curve,
 		mode,

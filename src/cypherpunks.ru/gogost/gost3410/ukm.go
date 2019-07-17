@@ -22,7 +22,8 @@ import (
 
 func NewUKM(raw []byte) *big.Int {
 	t := make([]byte, len(raw))
-	copy(t, raw)
-	reverse(t)
+	for i := 0; i < len(t); i++ {
+		t[i] = raw[len(raw)-i-1]
+	}
 	return bytes2big(t)
 }

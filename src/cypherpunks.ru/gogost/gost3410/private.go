@@ -30,7 +30,7 @@ type PrivateKey struct {
 
 func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
 	if len(raw) != int(mode) {
-		errors.New("Invalid private key length")
+		return nil, errors.New("Invalid private key length")
 	}
 	key := make([]byte, int(mode))
 	for i := 0; i < len(key); i++ {

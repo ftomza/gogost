@@ -161,7 +161,9 @@ func BenchmarkVerify2001(b *testing.B) {
 
 func TestPrvEqualsTo1(t *testing.T) {
 	c := CurveIdGostR34102001TestParamSet()
-	prv, err := NewPrivateKey(c, Mode2001, []byte{0x01})
+	prvRaw := make([]byte, int(Mode2001))
+	prvRaw[len(prvRaw)-1] = 1
+	prv, err := NewPrivateKey(c, Mode2001, prvRaw)
 	if err != nil {
 		t.FailNow()
 	}

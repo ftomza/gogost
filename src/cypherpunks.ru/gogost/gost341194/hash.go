@@ -31,7 +31,7 @@ const (
 )
 
 var (
-	SboxDefault *gost28147.Sbox = &gost28147.GostR3411_94_TestParamSet
+	SboxDefault *gost28147.Sbox = &gost28147.SboxIdGostR341194TestParamSet
 
 	c2 [BlockSize]byte = [BlockSize]byte{
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

@@ -34,7 +34,7 @@ func (prv *PrivateKey) KEK2001(pub *PublicKey, ukm *big.Int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	h := gost341194.New(&gost28147.GostR3411_94_CryptoProParamSet)
+	h := gost341194.New(&gost28147.SboxIdGostR341194CryptoProParamSet)
 	h.Write(key)
 	return h.Sum(key[:0]), nil
 }

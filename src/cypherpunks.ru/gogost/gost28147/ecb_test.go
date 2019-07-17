@@ -29,7 +29,7 @@ func TestECBGCL3Vectors(t *testing.T) {
 		0x15, 0x47, 0x12, 0x42, 0x91, 0xae, 0x1e, 0x8a,
 		0x2f, 0x79, 0xcd, 0x9e, 0xd2, 0xbc, 0xef, 0xbd,
 	}
-	c := NewCipher(key, &Gost2814789_TestParamSet)
+	c := NewCipher(key, &SboxIdGost2814789TestParamSet)
 	plaintext := []byte{
 		0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00,
 		0x0f, 0x0e, 0x0d, 0x0c, 0x0b, 0x0a, 0x09, 0x08,
@@ -113,7 +113,7 @@ func TestECBGCL3Vectors(t *testing.T) {
 
 // Crypto++ 5.6.2 test vectors
 func TestECBCryptoPPVectors(t *testing.T) {
-	sbox := &AppliedCryptographyParamSet
+	sbox := &SboxAppliedCryptographyParamSet
 	var key [KeySize]byte
 	var pt [BlockSize]byte
 	var ct [BlockSize]byte
@@ -235,7 +235,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 
 // http://cryptomanager.com/tv.html test vectors.
 func TestECBCryptomanager(t *testing.T) {
-	sbox := &GostR3411_94_TestParamSet
+	sbox := &SboxIdGostR341194TestParamSet
 	key := [KeySize]byte{
 		0x75, 0x71, 0x31, 0x34, 0xB6, 0x0F, 0xEC, 0x45,
 		0xA6, 0x07, 0xBB, 0x83, 0xAA, 0x37, 0x46, 0xAF,

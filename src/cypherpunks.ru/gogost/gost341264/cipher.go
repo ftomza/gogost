@@ -40,7 +40,10 @@ func NewCipher(key [KeySize]byte) *Cipher {
 		keyCompatible[i*4+3] = key[i*4+0]
 	}
 	return &Cipher{
-		c:   gost28147.NewCipher(*keyCompatible, &gost28147.Gost28147_tc26_ParamZ),
+		c: gost28147.NewCipher(
+			*keyCompatible,
+			&gost28147.SboxIdtc26gost28147paramZ,
+		),
 		blk: new([BlockSize]byte),
 	}
 }

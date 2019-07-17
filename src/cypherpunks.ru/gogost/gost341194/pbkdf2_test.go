@@ -26,7 +26,7 @@ import (
 )
 
 func PBKDF2Hash() hash.Hash {
-	return New(&gost28147.GostR3411_94_CryptoProParamSet)
+	return New(&gost28147.SboxIdGostR341194CryptoProParamSet)
 }
 
 // Test vectors for PBKDF2 taken from

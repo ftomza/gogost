@@ -135,7 +135,7 @@ func TestVectors(t *testing.T) {
 }
 
 func TestVectorsCryptoPro(t *testing.T) {
-	h := New(&gost28147.GostR3411_94_CryptoProParamSet)
+	h := New(&gost28147.SboxIdGostR341194CryptoProParamSet)
 
 	if bytes.Compare(h.Sum(nil), []byte{
 		0x98, 0x1e, 0x5f, 0x3c, 0xa3, 0x0c, 0x84, 0x14,

@@ -36,6 +36,10 @@ type Curve struct {
 	A *big.Int
 	B *big.Int
 
+	// Equation coefficients of the elliptic curve in twisted Edwards form
+	E *big.Int
+	D *big.Int
+
 	// Basic point X and Y coordinates
 	X *big.Int
 	Y *big.Int
@@ -44,9 +48,13 @@ type Curve struct {
 	t  *big.Int
 	tx *big.Int
 	ty *big.Int
+
+	// Cached s/t parameters for Edwards curve points conversion
+	edS *big.Int
+	edT *big.Int
 }
 
-func NewCurve(p, q, a, b, x, y *big.Int) (*Curve, error) {
+func NewCurve(p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
 	c := Curve{
 		P:  p,
 		Q:  q,
@@ -71,6 +79,9 @@ func NewCurve(p, q, a, b, x, y *big.Int) (*Curve, error) {
 	if r1.Cmp(r2) != 0 {
 		return nil, errors.New("Invalid curve parameters")
 	}
+	if e != nil && d != nil {
+		c.E = e
+		c.D = d
 	}
 	return &c, nil
 }

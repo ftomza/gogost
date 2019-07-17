@@ -150,6 +150,8 @@ func TestGCL3Vectors(t *testing.T) {
 		bytes2big(b),
 		bytes2big(x),
 		bytes2big(y),
+		nil,
+		nil,
 	)
 	if err != nil {
 		t.FailNow()
@@ -379,6 +381,31 @@ func TestSESPAKE(t *testing.T) {
 		}
 	}
 }
+
+// Twisted Edwards to Weierstrass coordinates conversion and vice versa
+func TestUVXYConversion(t *testing.T) {
+	f := func(c *Curve, uRaw, vRaw []byte) {
+		u := bytes2big(uRaw)
+		v := bytes2big(vRaw)
+		x, y := UV2XY(c, u, v)
+		if x.Cmp(c.X) != 0 {
+			t.FailNow()
+		}
+		if y.Cmp(c.Y) != 0 {
+			t.FailNow()
+		}
+		uGot, vGot := XY2UV(c, c.X, c.Y)
+		if u.Cmp(uGot) != 0 {
+			t.FailNow()
+		}
+		if v.Cmp(vGot) != 0 {
+			t.FailNow()
+		}
+	}
+	raw, _ := hex.DecodeString("60CA1E32AA475B348488C38FAB07649CE7EF8DBE87F22E81F92B2592DBA300E7")
+	f(CurveIdtc26gost34102012256paramSetA(), []byte{0x0D}, raw)
+	raw, _ = hex.DecodeString("469AF79D1FB1F5E16B99592B77A01E2A0FDFB0D01794368D9A56117F7B38669522DD4B650CF789EEBF068C5D139732F0905622C04B2BAAE7600303EE73001A3D")
+	f(CurveIdtc26gost34102012512paramSetC(), []byte{0x12}, raw)
 }
 
 func BenchmarkSign2012(b *testing.B) {

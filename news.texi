@@ -20,25 +20,25 @@
     @item Backward incompatible Sbox and curves parameters renaming, to
       comply with OIDs identifying them:
 @verbatim
-      Gost2814789_TestParamSet       -> SboxIdGost2814789TestParamSet
-      Gost28147_CryptoProParamSetA   -> SboxIdGost2814789CryptoProAParamSet
-      Gost28147_CryptoProParamSetB   -> SboxIdGost2814789CryptoProBParamSet
-      Gost28147_CryptoProParamSetC   -> SboxIdGost2814789CryptoProCParamSet
-      Gost28147_CryptoProParamSetD   -> SboxIdGost2814789CryptoProDParamSet
-      GostR3411_94_TestParamSet      -> SboxIdGostR341194TestParamSet
-      Gost28147_tc26_ParamZ          -> SboxIdtc26gost28147paramZ
-      GostR3411_94_CryptoProParamSet -> SboxIdGostR341194CryptoProParamSet
-      EACParamSet                    -> SboxEACParamSet
+Gost2814789_TestParamSet       -> SboxIdGost2814789TestParamSet
+Gost28147_CryptoProParamSetA   -> SboxIdGost2814789CryptoProAParamSet
+Gost28147_CryptoProParamSetB   -> SboxIdGost2814789CryptoProBParamSet
+Gost28147_CryptoProParamSetC   -> SboxIdGost2814789CryptoProCParamSet
+Gost28147_CryptoProParamSetD   -> SboxIdGost2814789CryptoProDParamSet
+GostR3411_94_TestParamSet      -> SboxIdGostR341194TestParamSet
+Gost28147_tc26_ParamZ          -> SboxIdtc26gost28147paramZ
+GostR3411_94_CryptoProParamSet -> SboxIdGostR341194CryptoProParamSet
+EACParamSet                    -> SboxEACParamSet
 
-      CurveParamsGostR34102001cc            -> CurveGostR34102001ParamSetcc
-      CurveParamsGostR34102001Test          -> CurveIdGostR34102001TestParamSet
-      CurveParamsGostR34102001CryptoProA    -> CurveIdGostR34102001CryptoProAParamSet
-      CurveParamsGostR34102001CryptoProB    -> CurveIdGostR34102001CryptoProBParamSet
-      CurveParamsGostR34102001CryptoProC    -> CurveIdGostR34102001CryptoProCParamSet
-      CurveParamsGostR34102001CryptoProXchA -> CurveIdGostR34102001CryptoProXchAParamSet
-      CurveParamsGostR34102001CryptoProXchB -> CurveIdGostR34102001CryptoProXchBParamSet
-      CurveParamsGostR34102012TC26ParamSetA -> CurveIdtc26gost341012512paramSetA
-      CurveParamsGostR34102012TC26ParamSetB -> CurveIdtc26gost341012512paramSetB
+CurveParamsGostR34102001cc            -> CurveGostR34102001ParamSetcc
+CurveParamsGostR34102001Test          -> CurveIdGostR34102001TestParamSet
+CurveParamsGostR34102001CryptoProA    -> CurveIdGostR34102001CryptoProAParamSet
+CurveParamsGostR34102001CryptoProB    -> CurveIdGostR34102001CryptoProBParamSet
+CurveParamsGostR34102001CryptoProC    -> CurveIdGostR34102001CryptoProCParamSet
+CurveParamsGostR34102001CryptoProXchA -> CurveIdGostR34102001CryptoProXchAParamSet
+CurveParamsGostR34102001CryptoProXchB -> CurveIdGostR34102001CryptoProXchBParamSet
+CurveParamsGostR34102012TC26ParamSetA -> CurveIdtc26gost341012512paramSetA
+CurveParamsGostR34102012TC26ParamSetB -> CurveIdtc26gost341012512paramSetB
 @end verbatim
     @item Various additional test vectors
     @item go modules friendliness

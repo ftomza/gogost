@@ -101,10 +101,11 @@ func (mgm *MGM) Overhead() int {
 }
 
 func incr(data []byte) {
-	if len(data) == 4 {
-		binary.BigEndian.PutUint32(data, binary.BigEndian.Uint32(data)+1)
-	} else {
-		binary.BigEndian.PutUint64(data, binary.BigEndian.Uint64(data)+1)
+	for i := len(data) - 1; i >= 0; i-- {
+		data[i]++
+		if data[i] != 0 {
+			return
+		}
 	}
 }
 

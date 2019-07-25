@@ -64,7 +64,7 @@ func NewMGM(cipher cipher.Block, tagSize int) (cipher.AEAD, error) {
 	if !(blockSize == 8 || blockSize == 16) {
 		return nil, errors.New("MGM supports only 64/128 blocksizes")
 	}
-	if tagSize < 4 || tagSize > 16 || tagSize > blockSize {
+	if tagSize < 4 || tagSize > blockSize {
 		return nil, errors.New("invalid tag size")
 	}
 	mgm := MGM{

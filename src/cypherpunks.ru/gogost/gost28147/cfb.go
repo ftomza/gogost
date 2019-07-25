@@ -21,8 +21,10 @@ type CFBEncrypter struct {
 	iv []byte
 }
 
-func (c *Cipher) NewCFBEncrypter(iv [BlockSize]byte) *CFBEncrypter {
-	return &CFBEncrypter{c, iv[:]}
+func (c *Cipher) NewCFBEncrypter(iv []byte) *CFBEncrypter {
+	if len(iv) != BlockSize {
+		panic("iv length is not equal to blocksize")
+	}
 }
 
 func (c *CFBEncrypter) XORKeyStream(dst, src []byte) {
@@ -48,8 +50,10 @@ type CFBDecrypter struct {
 	iv []byte
 }
 
-func (c *Cipher) NewCFBDecrypter(iv [BlockSize]byte) *CFBDecrypter {
-	return &CFBDecrypter{c, iv[:]}
+func (c *Cipher) NewCFBDecrypter(iv []byte) *CFBDecrypter {
+	if len(iv) != BlockSize {
+		panic("iv length is not equal to blocksize")
+	}
 }
 
 func (c *CFBDecrypter) XORKeyStream(dst, src []byte) {

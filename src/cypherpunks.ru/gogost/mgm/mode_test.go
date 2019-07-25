@@ -28,7 +28,7 @@ import (
 )
 
 func TestVector(t *testing.T) {
-	key := [gost3412128.KeySize]byte{
+	key := []byte{
 		0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF,
 		0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
 		0xFE, 0xDC, 0xBA, 0x98, 0x76, 0x54, 0x32, 0x10,
@@ -133,7 +133,7 @@ func TestSymmetric(t *testing.T) {
 	sym(
 		gost3412128.KeySize,
 		gost3412128.BlockSize,
-		gost3412128.NewCipher(*key128),
+		gost3412128.NewCipher(key128[:]),
 		nonce[:gost3412128.BlockSize],
 	)
 
@@ -142,7 +142,7 @@ func TestSymmetric(t *testing.T) {
 	sym(
 		gost341264.KeySize,
 		gost341264.BlockSize,
-		gost341264.NewCipher(*key64),
+		gost341264.NewCipher(key64[:]),
 		nonce[:gost341264.BlockSize],
 	)
 }

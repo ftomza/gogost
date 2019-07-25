@@ -19,13 +19,12 @@ package gost28147
 import (
 	"bytes"
 	"crypto/cipher"
-	"crypto/rand"
 	"testing"
 	"testing/quick"
 )
 
 func TestCFBCryptomanager(t *testing.T) {
-	key := [KeySize]byte{
+	key := []byte{
 		0x75, 0x71, 0x31, 0x34, 0xB6, 0x0F, 0xEC, 0x45,
 		0xA6, 0x07, 0xBB, 0x83, 0xAA, 0x37, 0x46, 0xAF,
 		0x4F, 0xF9, 0x9D, 0xA6, 0xD1, 0xB5, 0x3B, 0x5B,
@@ -41,7 +40,7 @@ func TestCFBCryptomanager(t *testing.T) {
 		0xAD, 0x36, 0x16, 0x94, 0x0E, 0x16, 0x42, 0x42,
 	}
 	c := NewCipher(key, sbox)
-	iv := [8]byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}
+	iv := []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}
 	tmp := make([]byte, 16)
 	fe := c.NewCFBEncrypter(iv)
 	fe.XORKeyStream(tmp, pt)
@@ -56,19 +55,15 @@ func TestCFBCryptomanager(t *testing.T) {
 }
 
 func TestCFBRandom(t *testing.T) {
-	var key [KeySize]byte
-	rand.Read(key[:])
-	c := NewCipher(key, SboxDefault)
-	f := func(ivRaw []byte, pt []byte) bool {
-		if len(pt) == 0 || len(ivRaw) < 8 {
+	f := func(key [KeySize]byte, iv [BlockSize]byte, pt []byte) bool {
+		if len(pt) == 0 {
 			return true
 		}
-		var iv [8]byte
-		copy(iv[:], ivRaw[:8])
+		c := NewCipher(key[:], SboxDefault)
 		ct := make([]byte, len(pt))
-		fe := c.NewCFBEncrypter(iv)
+		fe := c.NewCFBEncrypter(iv[:])
 		fe.XORKeyStream(ct, pt)
-		fd := c.NewCFBDecrypter(iv)
+		fd := c.NewCFBDecrypter(iv[:])
 		pt2 := make([]byte, len(ct))
 		fd.XORKeyStream(pt2, ct)
 		return bytes.Compare(pt2, pt) == 0
@@ -81,7 +76,7 @@ func TestCFBRandom(t *testing.T) {
 func TestCFBInterface(t *testing.T) {
 	var key [32]byte
 	var iv [8]byte
-	c := NewCipher(key, SboxDefault)
-	var _ cipher.Stream = c.NewCFBEncrypter(iv)
-	var _ cipher.Stream = c.NewCFBDecrypter(iv)
+	c := NewCipher(key[:], SboxDefault)
+	var _ cipher.Stream = c.NewCFBEncrypter(iv[:])
+	var _ cipher.Stream = c.NewCFBDecrypter(iv[:])
 }

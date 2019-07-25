@@ -22,8 +22,11 @@ type CTR struct {
 	n2 nv
 }
 
-func (c *Cipher) NewCTR(iv [BlockSize]byte) *CTR {
-	n1, n2 := block2nvs(iv[:])
+func (c *Cipher) NewCTR(iv []byte) *CTR {
+	if len(iv) != BlockSize {
+		panic("iv length is not equal to blocksize")
+	}
+	n1, n2 := block2nvs(iv)
 	n2, n1 = c.xcrypt(SeqEncrypt, n1, n2)
 	return &CTR{c, n1, n2}
 }

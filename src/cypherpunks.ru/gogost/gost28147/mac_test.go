@@ -25,11 +25,10 @@ import (
 )
 
 func TestMACVectors(t *testing.T) {
-	var key [KeySize]byte
-	copy(key[:], []byte("This is message\xFF length\x0032 bytes"))
+	key := []byte("This is message\xFF length\x0032 bytes")
 	c := NewCipher(key, SboxDefault)
 	var iv [8]byte
-	m, err := c.NewMAC(8, iv)
+	m, err := c.NewMAC(8, iv[:])
 	if err != nil {
 		t.Fail()
 	}
@@ -65,16 +64,12 @@ func TestMACVectors(t *testing.T) {
 func TestMACRandom(t *testing.T) {
 	var key [KeySize]byte
 	rand.Read(key[:])
-	c := NewCipher(key, SboxDefault)
-	f := func(ivRaw []byte, data []byte) bool {
+	c := NewCipher(key[:], SboxDefault)
+	f := func(iv [BlockSize]byte, data []byte) bool {
 		if len(data) == 0 {
 			return true
 		}
-		var iv [8]byte
-		if len(ivRaw) >= 8 {
-			copy(iv[:], ivRaw[:8])
-		}
-		m, err := c.NewMAC(8, iv)
+		m, err := c.NewMAC(8, iv[:])
 		if err != nil {
 			t.Fail()
 		}
@@ -99,23 +94,23 @@ func TestMACRandom(t *testing.T) {
 }
 
 func TestMACInterface(t *testing.T) {
-	var key [32]byte
+	var key [KeySize]byte
 	var iv [8]byte
-	c := NewCipher(key, SboxDefault)
-	m, _ := c.NewMAC(8, iv)
+	c := NewCipher(key[:], SboxDefault)
+	m, _ := c.NewMAC(8, iv[:])
 	var _ hash.Hash = m
 }
 
 func BenchmarkMAC(b *testing.B) {
-	var key [KeySize]byte
-	var iv [BlockSize]byte
-	rand.Read(key[:])
-	rand.Read(iv[:])
+	key := make([]byte, KeySize)
+	iv := make([]byte, BlockSize)
+	rand.Read(key)
+	rand.Read(iv)
 	b1 := make([]byte, BlockSize)
 	b2 := make([]byte, BlockSize)
 	rand.Read(b1)
 	rand.Read(b2)
-	c := NewCipher(key, SboxDefault)
+	c := NewCipher(key[:], SboxDefault)
 	mac, _ := c.NewMAC(BlockSize, iv)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

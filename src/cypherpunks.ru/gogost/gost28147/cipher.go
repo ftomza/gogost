@@ -53,15 +53,17 @@ var (
 )
 
 type Cipher struct {
-	key  *[KeySize]byte
+	key  [KeySize]byte
 	sbox *Sbox
 	x    [8]nv
 }
 
-func NewCipher(key [KeySize]byte, sbox *Sbox) *Cipher {
-	c := Cipher{}
-	c.key = &key
-	c.sbox = sbox
+func NewCipher(key []byte, sbox *Sbox) *Cipher {
+	if len(key) != KeySize {
+		panic("invalid key size")
+	}
+	c := Cipher{sbox: sbox}
+	copy(c.key[:], key)
 	c.x = [8]nv{
 		nv(key[0]) | nv(key[1])<<8 | nv(key[2])<<16 | nv(key[3])<<24,
 		nv(key[4]) | nv(key[5])<<8 | nv(key[6])<<16 | nv(key[7])<<24,

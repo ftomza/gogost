@@ -132,7 +132,10 @@ func (c *Cipher) BlockSize() int {
 	return BlockSize
 }
 
-func NewCipher(key [KeySize]byte) *Cipher {
+func NewCipher(key []byte) *Cipher {
+	if len(key) != KeySize {
+		panic("invalid key size")
+	}
 	ks := new([10]*[BlockSize]byte)
 	kr0 := new([BlockSize]byte)
 	kr1 := new([BlockSize]byte)

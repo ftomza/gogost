@@ -26,7 +26,7 @@ import (
 
 func TestCTRGCL3Vector(t *testing.T) {
 	sbox := &SboxIdGost2814789TestParamSet
-	key := [KeySize]byte{
+	key := []byte{
 		0x04, 0x75, 0xf6, 0xe0, 0x50, 0x38, 0xfb, 0xfa,
 		0xd2, 0xc7, 0xc3, 0x90, 0xed, 0xb3, 0xca, 0x3d,
 		0x15, 0x47, 0x12, 0x42, 0x91, 0xae, 0x1e, 0x8a,
@@ -100,7 +100,7 @@ func TestCTRGCL3Vector(t *testing.T) {
 		0x13, 0xc3, 0xfe, 0x1f, 0x8c, 0x55, 0x63, 0x09,
 		0x1f, 0xcd, 0xd4, 0x28, 0xca,
 	}
-	iv := [8]byte{0x02, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}
+	iv := []byte{0x02, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}
 	c := NewCipher(key, sbox)
 	ctr := c.NewCTR(iv)
 	tmp := make([]byte, len(plaintext))
@@ -117,7 +117,7 @@ func TestCTRGCL3Vector(t *testing.T) {
 
 func TestCTRGCL2Vector(t *testing.T) {
 	sbox := &SboxIdGost2814789TestParamSet
-	key := [KeySize]byte{
+	key := []byte{
 		0xfc, 0x7a, 0xd2, 0x88, 0x6f, 0x45, 0x5b, 0x50,
 		0xd2, 0x90, 0x08, 0xfa, 0x62, 0x2b, 0x57, 0xd5,
 		0xc6, 0x5b, 0x3c, 0x63, 0x72, 0x02, 0x02, 0x57,
@@ -143,13 +143,13 @@ func TestCTRGCL2Vector(t *testing.T) {
 	}
 	var iv [8]byte
 	c := NewCipher(key, sbox)
-	ctr := c.NewCTR(iv)
+	ctr := c.NewCTR(iv[:])
 	tmp := make([]byte, len(plaintext))
 	ctr.XORKeyStream(tmp, plaintext)
 	if bytes.Compare(tmp, ciphertext) != 0 {
 		t.Fail()
 	}
-	ctr = c.NewCTR(iv)
+	ctr = c.NewCTR(iv[:])
 	ctr.XORKeyStream(tmp, tmp)
 	if bytes.Compare(tmp, plaintext) != 0 {
 		t.Fail()
@@ -157,19 +157,15 @@ func TestCTRGCL2Vector(t *testing.T) {
 }
 
 func TestCTRRandom(t *testing.T) {
-	var key [KeySize]byte
-	rand.Read(key[:])
-	c := NewCipher(key, SboxDefault)
-	f := func(ivRaw []byte, pt []byte) bool {
-		if len(pt) == 0 || len(ivRaw) < 8 {
+	f := func(key [KeySize]byte, iv [BlockSize]byte, pt []byte) bool {
+		if len(pt) == 0 {
 			return true
 		}
-		var iv [8]byte
-		copy(iv[:], ivRaw[:8])
+		c := NewCipher(key[:], SboxDefault)
 		tmp := make([]byte, len(pt))
-		ctr := c.NewCTR(iv)
-		ctr.XORKeyStream(tmp, pt)
-		ctr = c.NewCTR(iv)
+		ctr := c.NewCTR(iv[:])
+		ctr.XORKeyStream(tmp, pt[:])
+		ctr = c.NewCTR(iv[:])
 		ctr.XORKeyStream(tmp, tmp)
 		return bytes.Compare(tmp, pt) == 0
 	}
@@ -178,17 +174,17 @@ func TestCTRRandom(t *testing.T) {
 	}
 }
 func TestCTRInterface(t *testing.T) {
-	var key [32]byte
+	var key [KeySize]byte
 	var iv [8]byte
-	c := NewCipher(key, SboxDefault)
-	var _ cipher.Stream = c.NewCTR(iv)
+	c := NewCipher(key[:], SboxDefault)
+	var _ cipher.Stream = c.NewCTR(iv[:])
 }
 
 func BenchmarkCTR(b *testing.B) {
-	var key [KeySize]byte
-	var iv [BlockSize]byte
-	rand.Read(key[:])
-	rand.Read(iv[:])
+	key := make([]byte, KeySize)
+	iv := make([]byte, BlockSize)
+	rand.Read(key)
+	rand.Read(iv)
 	dst := make([]byte, BlockSize)
 	src := make([]byte, BlockSize)
 	rand.Read(src)

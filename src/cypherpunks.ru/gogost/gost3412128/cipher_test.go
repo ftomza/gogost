@@ -26,7 +26,7 @@ import (
 )
 
 var (
-	key [KeySize]byte = [KeySize]byte{
+	key []byte = []byte{
 		0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff,
 		0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
 		0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10,
@@ -43,15 +43,14 @@ var (
 )
 
 func TestCipherInterface(t *testing.T) {
-	var key [32]byte
-	var _ cipher.Block = NewCipher(key)
+	var _ cipher.Block = NewCipher(make([]byte, KeySize))
 }
 
 func TestRandom(t *testing.T) {
 	data := make([]byte, BlockSize)
 	f := func(key [KeySize]byte, pt [BlockSize]byte) bool {
 		io.ReadFull(rand.Reader, key[:])
-		c := NewCipher(key)
+		c := NewCipher(key[:])
 		c.Encrypt(data, pt[:])
 		c.Decrypt(data, data)
 		return bytes.Compare(data, pt[:]) == 0
@@ -62,8 +61,8 @@ func TestRandom(t *testing.T) {
 }
 
 func BenchmarkEncrypt(b *testing.B) {
-	var key [KeySize]byte
-	io.ReadFull(rand.Reader, key[:])
+	key := make([]byte, KeySize)
+	io.ReadFull(rand.Reader, key)
 	c := NewCipher(key)
 	blk := make([]byte, BlockSize)
 	b.ResetTimer()
@@ -73,8 +72,8 @@ func BenchmarkEncrypt(b *testing.B) {
 }
 
 func BenchmarkDecrypt(b *testing.B) {
-	var key [KeySize]byte
-	io.ReadFull(rand.Reader, key[:])
+	key := make([]byte, KeySize)
+	io.ReadFull(rand.Reader, key)
 	c := NewCipher(key)
 	blk := make([]byte, BlockSize)
 	b.ResetTimer()

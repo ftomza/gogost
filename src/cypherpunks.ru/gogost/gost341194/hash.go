@@ -145,8 +145,7 @@ func (h *Hash) step(hin, m [BlockSize]byte) [BlockSize]byte {
 	blockXor(k, u, v)
 	k = fP(k)
 	blockReverse(k[:], k[:])
-	kk := *k
-	c := gost28147.NewCipher(kk, h.sbox)
+	c := gost28147.NewCipher(k[:], h.sbox)
 	s := make([]byte, gost28147.BlockSize)
 	c.Encrypt(s, []byte{
 		hin[31], hin[30], hin[29], hin[28], hin[27], hin[26], hin[25], hin[24],
@@ -165,7 +164,7 @@ func (h *Hash) step(hin, m [BlockSize]byte) [BlockSize]byte {
 	blockXor(k, u, v)
 	k = fP(k)
 	blockReverse(k[:], k[:])
-	c = gost28147.NewCipher(*k, h.sbox)
+	c = gost28147.NewCipher(k[:], h.sbox)
 	c.Encrypt(s, []byte{
 		hin[23], hin[22], hin[21], hin[20], hin[19], hin[18], hin[17], hin[16],
 	})
@@ -183,7 +182,7 @@ func (h *Hash) step(hin, m [BlockSize]byte) [BlockSize]byte {
 	blockXor(k, u, v)
 	k = fP(k)
 	blockReverse(k[:], k[:])
-	c = gost28147.NewCipher(*k, h.sbox)
+	c = gost28147.NewCipher(k[:], h.sbox)
 	c.Encrypt(s, []byte{
 		hin[15], hin[14], hin[13], hin[12], hin[11], hin[10], hin[9], hin[8],
 	})
@@ -201,7 +200,7 @@ func (h *Hash) step(hin, m [BlockSize]byte) [BlockSize]byte {
 	blockXor(k, u, v)
 	k = fP(k)
 	blockReverse(k[:], k[:])
-	c = gost28147.NewCipher(*k, h.sbox)
+	c = gost28147.NewCipher(k[:], h.sbox)
 	c.Encrypt(s, []byte{
 		hin[7], hin[6], hin[5], hin[4], hin[3], hin[2], hin[1], hin[0],
 	})

@@ -41,12 +41,15 @@ type MAC struct {
 // Size is in bytes and must be between 1 and 8. To be RFC conformant,
 // iv must be the first block of the authenticated data, second and
 // following ones are fed to Write function.
-func (c *Cipher) NewMAC(size int, iv [BlockSize]byte) (*MAC, error) {
+func (c *Cipher) NewMAC(size int, iv []byte) (*MAC, error) {
 	if size == 0 || size > 8 {
 		return nil, errors.New("Invalid tag size")
 	}
-	m := MAC{c: c, size: size, iv: iv[:]}
-	n2, n1 := block2nvs(iv[:])
+	if len(iv) != BlockSize {
+		return nil, errors.New("iv length is not equal to blocksize")
+	}
+	m := MAC{c: c, size: size, iv: iv}
+	n2, n1 := block2nvs(iv)
 	m.iv = make([]byte, BlockSize)
 	nvs2block(n1, n2, m.iv)
 	m.prev = make([]byte, BlockSize)

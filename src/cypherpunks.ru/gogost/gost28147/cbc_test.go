@@ -19,18 +19,13 @@ package gost28147
 import (
 	"bytes"
 	"crypto/cipher"
-	"crypto/rand"
 	"testing"
 	"testing/quick"
 )
 
 func TestCBCCrypter(t *testing.T) {
-	var key [KeySize]byte
-	var iv [BlockSize]byte
-	rand.Read(key[:])
-	rand.Read(iv[:])
-	c := NewCipher(key, SboxDefault)
-	f := func(pt []byte) bool {
+	f := func(key [KeySize]byte, iv [BlockSize]byte, pt []byte) bool {
+		c := NewCipher(key[:], SboxDefault)
 		for i := 0; i < BlockSize; i++ {
 			pt = append(pt, pt...)
 		}

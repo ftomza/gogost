@@ -23,8 +23,7 @@ import (
 )
 
 func TestCipherInterface(t *testing.T) {
-	var key [32]byte
-	var _ cipher.Block = NewCipher(key, SboxDefault)
+	var _ cipher.Block = NewCipher(make([]byte, KeySize), SboxDefault)
 }
 
 func BenchmarkCipher(b *testing.B) {
@@ -33,7 +32,7 @@ func BenchmarkCipher(b *testing.B) {
 	dst := make([]byte, BlockSize)
 	src := make([]byte, BlockSize)
 	rand.Read(src)
-	c := NewCipher(key, SboxDefault)
+	c := NewCipher(key[:], SboxDefault)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c.Encrypt(dst, src)

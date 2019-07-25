@@ -31,8 +31,11 @@ type Cipher struct {
 	blk *[BlockSize]byte
 }
 
-func NewCipher(key [KeySize]byte) *Cipher {
-	keyCompatible := new([KeySize]byte)
+func NewCipher(key []byte) *Cipher {
+	if len(key) != KeySize {
+		panic("invalid key size")
+	}
+	keyCompatible := make([]byte, KeySize)
 	for i := 0; i < KeySize/4; i++ {
 		keyCompatible[i*4+0] = key[i*4+3]
 		keyCompatible[i*4+1] = key[i*4+2]
@@ -40,10 +43,7 @@ func NewCipher(key [KeySize]byte) *Cipher {
 		keyCompatible[i*4+3] = key[i*4+0]
 	}
 	return &Cipher{
-		c: gost28147.NewCipher(
-			*keyCompatible,
-			&gost28147.SboxIdtc26gost28147paramZ,
-		),
+		c:   gost28147.NewCipher(keyCompatible, &gost28147.SboxIdtc26gost28147paramZ),
 		blk: new([BlockSize]byte),
 	}
 }

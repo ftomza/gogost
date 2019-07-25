@@ -17,7 +17,6 @@
 package gost3410
 
 import (
-	"errors"
 	"math/big"
 
 	"cypherpunks.ru/gogost/gost34112012256"
@@ -27,9 +26,6 @@ import (
 // RFC 7836 VKO GOST R 34.10-2012 256-bit key agreement function.
 // UKM is user keying material, also called VKO-factor.
 func (prv *PrivateKey) KEK2012256(pub *PublicKey, ukm *big.Int) ([]byte, error) {
-	if prv.Mode != Mode2012 {
-		return nil, errors.New("KEK2012 can not be used in Mode2001")
-	}
 	key, err := prv.KEK(pub, ukm)
 	if err != nil {
 		return nil, err
@@ -42,9 +38,6 @@ func (prv *PrivateKey) KEK2012256(pub *PublicKey, ukm *big.Int) ([]byte, error) 
 // RFC 7836 VKO GOST R 34.10-2012 512-bit key agreement function.
 // UKM is user keying material, also called VKO-factor.
 func (prv *PrivateKey) KEK2012512(pub *PublicKey, ukm *big.Int) ([]byte, error) {
-	if prv.Mode != Mode2012 {
-		return nil, errors.New("KEK2012 can not be used in Mode2001")
-	}
 	key, err := prv.KEK(pub, ukm)
 	if err != nil {
 		return nil, err

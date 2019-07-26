@@ -29,6 +29,12 @@ const (
 	Size      = 64
 )
 
+/*
+func init() {
+	crypto.RegisterHash(crypto.GOSTR34112012512, New)
+}
+*/
+
 func New() hash.Hash {
 	return gost34112012.New(64)
 }

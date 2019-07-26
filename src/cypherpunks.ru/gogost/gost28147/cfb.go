@@ -25,6 +25,9 @@ func (c *Cipher) NewCFBEncrypter(iv []byte) *CFBEncrypter {
 	if len(iv) != BlockSize {
 		panic("iv length is not equal to blocksize")
 	}
+	encrypter := CFBEncrypter{c: c, iv: make([]byte, BlockSize)}
+	copy(encrypter.iv, iv)
+	return &encrypter
 }
 
 func (c *CFBEncrypter) XORKeyStream(dst, src []byte) {
@@ -54,6 +57,9 @@ func (c *Cipher) NewCFBDecrypter(iv []byte) *CFBDecrypter {
 	if len(iv) != BlockSize {
 		panic("iv length is not equal to blocksize")
 	}
+	decrypter := CFBDecrypter{c: c, iv: make([]byte, BlockSize)}
+	copy(decrypter.iv, iv)
+	return &decrypter
 }
 
 func (c *CFBDecrypter) XORKeyStream(dst, src []byte) {

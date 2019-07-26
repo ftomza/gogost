@@ -25,9 +25,11 @@ func (prv *PrivateKey) KEK(pub *PublicKey, ukm *big.Int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	keyX, keyY, err = prv.C.Exp(ukm, keyX, keyY)
-	if err != nil {
-		return nil, err
+	if ukm.Cmp(bigInt1) != 0 {
+		keyX, keyY, err = prv.C.Exp(ukm, keyX, keyY)
+		if err != nil {
+			return nil, err
+		}
 	}
 	pk := PublicKey{prv.C, prv.Mode, keyX, keyY}
 	return pk.Raw(), nil

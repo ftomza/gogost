@@ -30,18 +30,18 @@ func TestMACVectors(t *testing.T) {
 	var iv [8]byte
 	m, err := c.NewMAC(8, iv[:])
 	if err != nil {
-		t.Fail()
+		t.FailNow()
 	}
 
 	m.Write([]byte("a"))
 	if bytes.Compare(m.Sum(nil), []byte{0xbd, 0x5d, 0x3b, 0x5b, 0x2b, 0x7b, 0x57, 0xaf}) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	m.Reset()
 	m.Write([]byte("abc"))
 	if bytes.Compare(m.Sum(nil), []byte{0x28, 0x66, 0x1e, 0x40, 0x80, 0x5b, 0x1f, 0xf9}) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	m.Reset()
@@ -49,7 +49,7 @@ func TestMACVectors(t *testing.T) {
 		m.Write([]byte("U"))
 	}
 	if bytes.Compare(m.Sum(nil), []byte{0x1a, 0x06, 0xd1, 0xba, 0xd7, 0x45, 0x80, 0xef}) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	m.Reset()
@@ -57,7 +57,7 @@ func TestMACVectors(t *testing.T) {
 		m.Write([]byte("x"))
 	}
 	if bytes.Compare(m.Sum(nil), []byte{0x91, 0x7e, 0xe1, 0xf1, 0xa6, 0x68, 0xfb, 0xd3}) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 }
 
@@ -71,7 +71,7 @@ func TestMACRandom(t *testing.T) {
 		}
 		m, err := c.NewMAC(8, iv[:])
 		if err != nil {
-			t.Fail()
+			return false
 		}
 
 		var tag1 []byte

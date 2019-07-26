@@ -106,12 +106,12 @@ func TestCTRGCL3Vector(t *testing.T) {
 	tmp := make([]byte, len(plaintext))
 	ctr.XORKeyStream(tmp, plaintext)
 	if bytes.Compare(tmp, ciphertext) != 0 {
-		t.Fail()
+		t.Fatal("encryption failed")
 	}
 	ctr = c.NewCTR(iv)
 	ctr.XORKeyStream(tmp, tmp)
 	if bytes.Compare(tmp, plaintext) != 0 {
-		t.Fail()
+		t.Fatal("decryption failed")
 	}
 }
 
@@ -147,12 +147,12 @@ func TestCTRGCL2Vector(t *testing.T) {
 	tmp := make([]byte, len(plaintext))
 	ctr.XORKeyStream(tmp, plaintext)
 	if bytes.Compare(tmp, ciphertext) != 0 {
-		t.Fail()
+		t.Fatal("encryption failed")
 	}
 	ctr = c.NewCTR(iv[:])
 	ctr.XORKeyStream(tmp, tmp)
 	if bytes.Compare(tmp, plaintext) != 0 {
-		t.Fail()
+		t.Fatal("decryption failed")
 	}
 }
 

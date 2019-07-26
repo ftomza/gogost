@@ -102,12 +102,12 @@ func TestECBGCL3Vectors(t *testing.T) {
 	tmp := make([]byte, len(plaintext))
 	e.CryptBlocks(tmp, plaintext)
 	if bytes.Compare(tmp, ciphertext) != 0 {
-		t.Fail()
+		t.Fatal("encryption failed")
 	}
 	d := c.NewECBDecrypter()
 	d.CryptBlocks(tmp, tmp)
 	if bytes.Compare(tmp, plaintext) != 0 {
-		t.Fail()
+		t.Fatal("decryption failed")
 	}
 }
 
@@ -126,7 +126,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c := NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -140,7 +140,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -154,7 +154,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -168,7 +168,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -182,7 +182,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -196,7 +196,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -210,7 +210,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 
 	key = []byte{
@@ -224,7 +224,7 @@ func TestECBCryptoPPVectors(t *testing.T) {
 	c = NewCipher(key, sbox)
 	c.Encrypt(tmp, pt)
 	if bytes.Compare(tmp, ct) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 }
 
@@ -240,7 +240,7 @@ func TestECBCryptomanager(t *testing.T) {
 	tmp := make([]byte, BlockSize)
 	c.Encrypt(tmp, []byte{0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88})
 	if bytes.Compare(tmp, []byte{0x03, 0x25, 0x1E, 0x14, 0xF9, 0xD2, 0x8A, 0xCB}) != 0 {
-		t.Fail()
+		t.FailNow()
 	}
 }
 

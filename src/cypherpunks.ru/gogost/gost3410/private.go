@@ -17,6 +17,7 @@
 package gost3410
 
 import (
+	"crypto"
 	"errors"
 	"io"
 	"math/big"
@@ -105,4 +106,16 @@ Retry:
 		pad(s.Bytes(), int(prv.Mode)),
 		pad(r.Bytes(), int(prv.Mode))...,
 	), nil
+}
+
+func (prv *PrivateKey) Sign(rand io.Reader, digest []byte, opts crypto.SignerOpts) ([]byte, error) {
+	return prv.SignDigest(digest, rand)
+}
+
+func (prv *PrivateKey) Public() crypto.PublicKey {
+	pub, err := prv.PublicKey()
+	if err != nil {
+		panic(err)
+	}
+	return pub
 }

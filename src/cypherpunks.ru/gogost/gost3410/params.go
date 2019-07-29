@@ -24,6 +24,7 @@ var (
 
 	CurveGostR34102001ParamSetcc func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"GostR34102001ParamSetcc",
 			bytes2big([]byte{
 				0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -71,6 +72,7 @@ var (
 	// id-GostR3410-2001-TestParamSet
 	CurveIdGostR34102001TestParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-TestParamSet",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -118,6 +120,7 @@ var (
 	// id-GostR3410-2001-CryptoPro-A-ParamSet
 	CurveIdGostR34102001CryptoProAParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-CryptoPro-A-ParamSet",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -165,6 +168,7 @@ var (
 	// id-GostR3410-2001-CryptoPro-B-ParamSet
 	CurveIdGostR34102001CryptoProBParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-CryptoPro-B-ParamSet",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -212,6 +216,7 @@ var (
 	// id-GostR3410-2001-CryptoPro-C-ParamSet
 	CurveIdGostR34102001CryptoProCParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-CryptoPro-C-ParamSet",
 			bytes2big([]byte{
 				0x9B, 0x9F, 0x60, 0x5F, 0x5A, 0x85, 0x81, 0x07,
 				0xAB, 0x1E, 0xC8, 0x5E, 0x6B, 0x41, 0xC8, 0xAA,
@@ -259,6 +264,7 @@ var (
 	// id-GostR3410-2001-CryptoPro-XchA-ParamSet
 	CurveIdGostR34102001CryptoProXchAParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-CryptoPro-XchA-ParamSet",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -306,6 +312,7 @@ var (
 	// id-GostR3410-2001-CryptoPro-XchB-ParamSet
 	CurveIdGostR34102001CryptoProXchBParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-GostR3410-2001-CryptoPro-XchB-ParamSet",
 			bytes2big([]byte{
 				0x9B, 0x9F, 0x60, 0x5F, 0x5A, 0x85, 0x81, 0x07,
 				0xAB, 0x1E, 0xC8, 0x5E, 0x6B, 0x41, 0xC8, 0xAA,
@@ -353,6 +360,7 @@ var (
 	// id-tc26-gost-3410-2012-256-paramSetA
 	CurveIdtc26gost34102012256paramSetA func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-tc26-gost-3410-2012-256-paramSetA",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -405,6 +413,7 @@ var (
 	// id-tc26-gost-3410-12-512-paramSetA
 	CurveIdtc26gost341012512paramSetA func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-tc26-gost-3410-12-512-paramSetA",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -476,6 +485,7 @@ var (
 	// id-tc26-gost-3410-12-512-paramSetB
 	CurveIdtc26gost341012512paramSetB func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-tc26-gost-3410-12-512-paramSetB",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -547,6 +557,7 @@ var (
 	// id-tc26-gost-3410-2012-512-paramSetC
 	CurveIdtc26gost34102012512paramSetC func() *Curve = func() *Curve {
 		curve, err := NewCurve(
+			"id-tc26-gost-3410-2012-512-paramSetC",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,

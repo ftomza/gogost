@@ -29,6 +29,8 @@ var (
 )
 
 type Curve struct {
+	Name string // Just simple identifier
+
 	P *big.Int // Characteristic of the underlying prime field
 	Q *big.Int // Elliptic curve subgroup order
 
@@ -54,17 +56,18 @@ type Curve struct {
 	edT *big.Int
 }
 
-func NewCurve(p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
+func NewCurve(name string, p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
 	c := Curve{
-		P:  p,
-		Q:  q,
-		A:  a,
-		B:  b,
-		X:  x,
-		Y:  y,
-		t:  big.NewInt(0),
-		tx: big.NewInt(0),
-		ty: big.NewInt(0),
+		Name: name,
+		P:    p,
+		Q:    q,
+		A:    a,
+		B:    b,
+		X:    x,
+		Y:    y,
+		t:    big.NewInt(0),
+		tx:   big.NewInt(0),
+		ty:   big.NewInt(0),
 	}
 	r1 := big.NewInt(0)
 	r2 := big.NewInt(0)

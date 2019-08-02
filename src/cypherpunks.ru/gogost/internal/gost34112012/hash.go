@@ -19,11 +19,15 @@
 package gost34112012
 
 import (
+	"bytes"
 	"encoding/binary"
+	"errors"
 )
 
 const (
 	BlockSize = 64
+
+	MarshaledName = "STREEBOG"
 )
 
 var (
@@ -402,4 +406,44 @@ func l(data *[BlockSize]byte) *[BlockSize]byte {
 		binary.LittleEndian.PutUint64(r[i*8:i*8+8], res64)
 	}
 	return r
+}
+
+func (h *Hash) MarshalBinary() (data []byte, err error) {
+	data = make([]byte, len(MarshaledName)+1+8+3*BlockSize+len(h.buf))
+	copy(data, []byte(MarshaledName))
+	idx := len(MarshaledName)
+	data[idx] = byte(h.size)
+	idx += 1
+	binary.BigEndian.PutUint64(data[idx:idx+8], h.n)
+	idx += 8
+	copy(data[idx:], h.hsh[:])
+	idx += BlockSize
+	copy(data[idx:], h.chk[:])
+	idx += BlockSize
+	copy(data[idx:], h.tmp[:])
+	idx += BlockSize
+	copy(data[idx:], h.buf)
+	return
+}
+
+func (h *Hash) UnmarshalBinary(data []byte) error {
+	if len(data) < len(MarshaledName)+1+8+3*BlockSize {
+		return errors.New("too short data")
+	}
+	if !bytes.HasPrefix(data, []byte(MarshaledName)) {
+		return errors.New("no hash name prefix")
+	}
+	idx := len(MarshaledName)
+	h.size = int(data[idx])
+	idx += 1
+	h.n = binary.BigEndian.Uint64(data[idx : idx+8])
+	idx += 8
+	copy(h.hsh[:], data[idx:])
+	idx += BlockSize
+	copy(h.chk[:], data[idx:])
+	idx += BlockSize
+	copy(h.tmp[:], data[idx:])
+	idx += BlockSize
+	h.buf = data[idx:]
+	return nil
 }

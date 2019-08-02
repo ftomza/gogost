@@ -19,6 +19,7 @@ package gost34112012
 import (
 	"bytes"
 	"crypto/rand"
+	"encoding"
 	"hash"
 	"testing"
 	"testing/quick"
@@ -27,6 +28,8 @@ import (
 func TestHashInterface(t *testing.T) {
 	h := New(64)
 	var _ hash.Hash = h
+	var _ encoding.BinaryMarshaler = h
+	var _ encoding.BinaryUnmarshaler = h
 }
 
 func TestVectors(t *testing.T) {
@@ -188,12 +191,30 @@ func TestRandom(t *testing.T) {
 		h.Reset()
 		h.Write(data)
 		d1 := h.Sum(nil)
+		h1Raw, err := h.MarshalBinary()
+		if err != nil {
+			return false
+		}
 		h.Reset()
 		for _, c := range data {
 			h.Write([]byte{c})
 		}
 		d2 := h.Sum(nil)
-		return bytes.Compare(d1, d2) == 0
+		if bytes.Compare(d1, d2) != 0 {
+			return false
+		}
+		h2Raw, err := h.MarshalBinary()
+		if err != nil {
+			return false
+		}
+		if bytes.Compare(h1Raw, h2Raw) != 0 {
+			return false
+		}
+		hNew := New(64)
+		if err = hNew.UnmarshalBinary(h1Raw); err != nil {
+			return false
+		}
+		return bytes.Compare(hNew.Sum(nil), d1) == 0
 	}
 	if err := quick.Check(f, nil); err != nil {
 		t.Error(err)

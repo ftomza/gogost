@@ -2,4 +2,4 @@ module cypherpunks.ru/gogost
 
 go 1.12
 
-require golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
+require golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4

@@ -5,12 +5,12 @@ Preferable way is to download tarball with the signature from
 website and, for example, run tests with benchmarks:
 
 @verbatim
-% wget http://gogost.cypherpunks.ru/gogost-3.0.tar.xz
-% wget http://gogost.cypherpunks.ru/gogost-3.0.tar.xz.sig
-% gpg --verify gogost-3.0.tar.xz.sig gogost-3.0.tar.xz
-% xz -d < gogost-3.0.tar.xz | tar xf -
-% make -C gogost-3.0 all bench
-% echo hello world | ./gogost-3.0/streebog256
+% wget http://gogost.cypherpunks.ru/gogost-4.0.tar.xz
+% wget http://gogost.cypherpunks.ru/gogost-4.0.tar.xz.sig
+% gpg --verify gogost-4.0.tar.xz.sig gogost-4.0.tar.xz
+% xz -d < gogost-4.0.tar.xz | tar xf -
+% make -C gogost-4.0 all bench
+% echo hello world | ./gogost-4.0/streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end verbatim
 
@@ -37,13 +37,18 @@ func main() {
     fmt.Println(hex.EncodeToString(h.Sum(nil)))
 }
 EOF
-% cp -r ../../gogost-3.0/src/cypherpunks.ru .
+% cp -r ../../gogost-4.0/src/cypherpunks.ru .
 % go run main.go
 c600fd9dd049cf8abd2f5b32e840d2cb0e41ea44de1c155dcd88dc84fe58a855
 @end verbatim
 
 @multitable {XXXXX} {XXXX-XX-XX} {XXXX KiB} {link sign} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
 @headitem Version @tab Date @tab Size @tab Tarball @tab SHA256 checksum @tab Streebog-256 checksum
+
+@item @ref{Release 4.0, 4.0} @tab 2019-08-12 @tab 56 KiB
+@tab @url{gogost-4.0.tar.xz, link} @url{gogost-4.0.tar.xz.sig, sign}
+@tab @code{4899B930 2110C9A9 592821D6 B206146F 2A66FC5A 3DEE9D6E 11F5EA51 72FEE6E6}
+@tab @code{ad8b58d42c3829e66dd1994265478eab921393cf0f7a8b520d900e38092a2cd6}
 
 @item @ref{Release 3.0, 3.0} @tab 2019-07-19 @tab 47 KiB
 @tab @url{gogost-3.0.tar.xz, link} @url{gogost-3.0.tar.xz.sig, sign}

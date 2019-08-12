@@ -8,20 +8,18 @@ release=$1
 git clone . $tmp/gogost-$release
 cd $tmp/gogost-$release
 git checkout $release
-git submodule update --init
 
-mkdir -p src/cypherpunks.ru/gogost/vendor
-cat > $tmp/includes <<EOF
-golang.org/x/crypto/AUTHORS
-golang.org/x/crypto/CONTRIBUTORS
-golang.org/x/crypto/LICENSE
-golang.org/x/crypto/PATENTS
-golang.org/x/crypto/README
-golang.org/x/crypto/pbkdf2
-EOF
-tar cfCI - src $tmp/includes | tar xfC - src/cypherpunks.ru/gogost/vendor
+crypto_path=src/cypherpunks.ru/gogost/vendor/golang.org/x/crypto
+mkdir -p $crypto_path
+( cd $cur/gopath/pkg/mod/golang.org/x/crypto@v0.0.0-20190701094942-4def268fd1a4 ; \
+    tar cf - AUTHORS CONTRIBUTORS LICENSE PATENTS README.md pbkdf2 hkdf ) |
+    tar xfC - $crypto_path
+
 find . -name .git -type d | xargs rm -fr
-rm -fr www* makedist* TODO src/golang.org $tmp/includes
+rm -f www* makedist* TODO
+
+find . -type d -exec chmod 700 {} \;
+find . -type f -exec chmod 600 {} \;
 
 cd ..
 tar cvf gogost-"$release".tar --uid=0 --gid=0 --numeric-owner gogost-"$release"

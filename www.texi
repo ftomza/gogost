@@ -49,6 +49,7 @@ Currently supported algorithms are:
 @item GOST R 34.12-2015 64-bit block cipher Магма (Magma)
 @item GOST R 34.13-2015 padding methods
 @item MGM AEAD mode for 64 and 128 bit ciphers
+@item TLSTREE keyscheduling function
 @end itemize
 
 Please send questions, bug reports and patches to

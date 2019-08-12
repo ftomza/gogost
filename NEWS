@@ -1,3 +1,14 @@
+4.0:
+    * Backward incompatible change: all keys passing to encryption
+      functions are slices now, not the fixed arrays. That heavily
+      simplifies the library usage
+    * Fix bug with overwriting IVs memory in gost28147.CFB*crypter
+    * TLSTREE, used in TLS 1.[23], implementation
+    * gost3410.KEK2012* can be used with any curves, not only 512-bit ones
+    * gost3410.PrivateKey satisfies crypto.Signer interface
+    * gost34112012* hashes satisfy encoding.Binary(Un)Marshaler
+    * Streebog256 HKDF test vectors
+
 3.0:
     * Multilinear Galois Mode (MGM) block cipher mode for
       64 and 128 bit ciphers

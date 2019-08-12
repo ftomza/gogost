@@ -3,6 +3,20 @@
 
 @table @strong
 
+@anchor{Release 4.0}
+@item 4.0
+    @itemize
+    @item Backward incompatible change: all keys passing to encryption
+        functions are slices now, not the fixed arrays. That heavily
+        simplifies the library usage
+    @item Fix bug with overwriting IVs memory in @code{gost28147.CFB*crypter}
+    @item @code{TLSTREE}, used in TLS 1.[23], implementation
+    @item @code{gost3410.KEK2012*} can be used with any curves, not only 512-bit ones
+    @item @code{gost3410.PrivateKey} satisfies @code{crypto.Signer} interface
+    @item @code{gost34112012*} hashes satisfy @code{encoding.Binary(Un)Marshaler}
+    @item Streebog256 HKDF test vectors
+    @end itemize
+
 @anchor{Release 3.0}
 @item 3.0
     @itemize

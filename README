@@ -19,6 +19,7 @@ GOST is GOvernment STandard of Russian Federation (and Soviet Union).
 * GOST R 34.12-2015 64-bit block cipher Магма (Magma)
 * GOST R 34.13-2015 padding methods
 * MGM AEAD mode for 64 and 128 bit ciphers
+* TLSTREE keyscheduling function
 
 Known problems:
 

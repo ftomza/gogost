@@ -24,7 +24,6 @@ var (
 
 	CurveGostR34102001ParamSetcc func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"GostR34102001ParamSetcc",
 			bytes2big([]byte{
 				0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -67,12 +66,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "GostR34102001ParamSetcc"
 		return curve
 	}
 	// id-GostR3410-2001-TestParamSet
 	CurveIdGostR34102001TestParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-GostR3410-2001-TestParamSet",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -115,12 +114,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-GostR3410-2001-TestParamSet"
 		return curve
 	}
 	// id-GostR3410-2001-CryptoPro-A-ParamSet
 	CurveIdGostR34102001CryptoProAParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-GostR3410-2001-CryptoPro-A-ParamSet",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -163,12 +162,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-GostR3410-2001-CryptoPro-A-ParamSet"
 		return curve
 	}
 	// id-GostR3410-2001-CryptoPro-B-ParamSet
 	CurveIdGostR34102001CryptoProBParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-GostR3410-2001-CryptoPro-B-ParamSet",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -211,12 +210,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-GostR3410-2001-CryptoPro-B-ParamSet"
 		return curve
 	}
 	// id-GostR3410-2001-CryptoPro-C-ParamSet
 	CurveIdGostR34102001CryptoProCParamSet func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-GostR3410-2001-CryptoPro-C-ParamSet",
 			bytes2big([]byte{
 				0x9B, 0x9F, 0x60, 0x5F, 0x5A, 0x85, 0x81, 0x07,
 				0xAB, 0x1E, 0xC8, 0x5E, 0x6B, 0x41, 0xC8, 0xAA,
@@ -259,16 +258,24 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-GostR3410-2001-CryptoPro-C-ParamSet"
 		return curve
 	}
 	// id-GostR3410-2001-CryptoPro-XchA-ParamSet
-	CurveIdGostR34102001CryptoProXchAParamSet func() *Curve = CurveIdGostR34102001CryptoProAParamSet
+	CurveIdGostR34102001CryptoProXchAParamSet func() *Curve = func() *Curve {
+		c := CurveIdGostR34102001CryptoProAParamSet()
+		c.Name = "id-GostR3410-2001-CryptoPro-XchA-ParamSet"
+		return c
+	}
 	// id-GostR3410-2001-CryptoPro-XchB-ParamSet
-	CurveIdGostR34102001CryptoProXchBParamSet func() *Curve = CurveIdGostR34102001CryptoProCParamSet
+	CurveIdGostR34102001CryptoProXchBParamSet func() *Curve = func() *Curve {
+		c := CurveIdGostR34102001CryptoProCParamSet()
+		c.Name = "id-GostR3410-2001-CryptoPro-XchB-ParamSet"
+		return c
+	}
 	// id-tc26-gost-3410-2012-256-paramSetA
 	CurveIdtc26gost34102012256paramSetA func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-tc26-gost-3410-2012-256-paramSetA",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -316,18 +323,30 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-tc26-gost-3410-2012-256-paramSetA"
 		return curve
 	}
 	// id-tc26-gost-3410-2012-256-paramSetB
-	CurveIdtc26gost34102012256paramSetB func() *Curve = CurveIdGostR34102001CryptoProAParamSet
+	CurveIdtc26gost34102012256paramSetB func() *Curve = func() *Curve {
+		c := CurveIdGostR34102001CryptoProAParamSet()
+		c.Name = "id-tc26-gost-3410-2012-256-paramSetB"
+		return c
+	}
 	// id-tc26-gost-3410-2012-256-paramSetC
-	CurveIdtc26gost34102012256paramSetC func() *Curve = CurveIdGostR34102001CryptoProBParamSet
+	CurveIdtc26gost34102012256paramSetC func() *Curve = func() *Curve {
+		c := CurveIdGostR34102001CryptoProBParamSet()
+		c.Name = "id-tc26-gost-3410-2012-256-paramSetC"
+		return c
+	}
 	// id-tc26-gost-3410-2012-256-paramSetD
-	CurveIdtc26gost34102012256paramSetD func() *Curve = CurveIdGostR34102001CryptoProCParamSet
+	CurveIdtc26gost34102012256paramSetD func() *Curve = func() *Curve {
+		c := CurveIdGostR34102001CryptoProCParamSet()
+		c.Name = "id-tc26-gost-3410-2012-256-paramSetD"
+		return c
+	}
 	// id-tc26-gost-3410-12-512-paramSetA
 	CurveIdtc26gost341012512paramSetA func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-tc26-gost-3410-12-512-paramSetA",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -394,12 +413,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-tc26-gost-3410-12-512-paramSetA"
 		return curve
 	}
 	// id-tc26-gost-3410-12-512-paramSetB
 	CurveIdtc26gost341012512paramSetB func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-tc26-gost-3410-12-512-paramSetB",
 			bytes2big([]byte{
 				0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -466,12 +485,12 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-tc26-gost-3410-12-512-paramSetB"
 		return curve
 	}
 	// id-tc26-gost-3410-2012-512-paramSetC
 	CurveIdtc26gost34102012512paramSetC func() *Curve = func() *Curve {
 		curve, err := NewCurve(
-			"id-tc26-gost-3410-2012-512-paramSetC",
 			bytes2big([]byte{
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 				0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -547,6 +566,7 @@ var (
 		if err != nil {
 			panic(err)
 		}
+		curve.Name = "id-tc26-gost-3410-2012-512-paramSetC"
 		return curve
 	}
 

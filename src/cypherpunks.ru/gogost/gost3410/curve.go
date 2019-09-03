@@ -56,9 +56,9 @@ type Curve struct {
 	edT *big.Int
 }
 
-func NewCurve(name string, p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
+func NewCurve(p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
 	c := Curve{
-		Name: name,
+		Name: "unknown",
 		P:    p,
 		Q:    q,
 		A:    a,

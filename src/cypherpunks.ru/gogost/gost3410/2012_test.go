@@ -144,7 +144,6 @@ func TestGCL3Vectors(t *testing.T) {
 		0x17, 0xE1, 0x93, 0x44, 0xE1, 0x73, 0xAE, 0x36,
 	}
 	c, err := NewCurve(
-		"some-name",
 		bytes2big(p),
 		bytes2big(q),
 		bytes2big(a),

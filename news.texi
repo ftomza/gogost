@@ -3,6 +3,13 @@
 
 @table @strong
 
+@anchor{Release 4.1}
+@item 4.1
+    @itemize
+    @item @code{ESPTREE} implementation
+
+    @end itemize
+
 @anchor{Release 4.0}
 @item 4.0
     @itemize

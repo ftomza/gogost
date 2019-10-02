@@ -13,27 +13,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package gost3410
+// GOST R 34.11-2012 512-bit hash function.
+// RFC 6986.
+package gost34112012512
 
 import (
-	"errors"
-	"math/big"
+	"hash"
 
-	"cypherpunks.ru/gogost/gost28147"
-	"cypherpunks.ru/gogost/gost341194"
+	"go.cypherpunks.ru/gogost/v4/internal/gost34112012"
 )
 
-// RFC 4357 VKO GOST R 34.10-2001 key agreement function.
-// UKM is user keying material, also called VKO-factor.
-func (prv *PrivateKey) KEK2001(pub *PublicKey, ukm *big.Int) ([]byte, error) {
-	if prv.Mode != Mode2001 {
-		return nil, errors.New("KEK2001 can not be used in Mode2012")
-	}
-	key, err := prv.KEK(pub, ukm)
-	if err != nil {
-		return nil, err
-	}
-	h := gost341194.New(&gost28147.SboxIdGostR341194CryptoProParamSet)
-	h.Write(key)
-	return h.Sum(key[:0]), nil
+const (
+	BlockSize = gost34112012.BlockSize
+	Size      = 64
+)
+
+/*
+func init() {
+	crypto.RegisterHash(crypto.GOSTR34112012512, New)
+}
+*/
+
+func New() hash.Hash {
+	return gost34112012.New(64)
 }

@@ -13,27 +13,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// GOST R 34.11-2012 256-bit hash function.
-// RFC 6986.
-package gost34112012256
+// Command-line 34.11-2012 256-bit hash function.
+package main
 
 import (
-	"hash"
+	"encoding/hex"
+	"flag"
+	"fmt"
+	"io"
+	"os"
 
-	"cypherpunks.ru/gogost/internal/gost34112012"
+	"go.cypherpunks.ru/gogost/v4"
+	"go.cypherpunks.ru/gogost/v4/gost34112012256"
 )
 
-const (
-	BlockSize = gost34112012.BlockSize
-	Size      = 32
+var (
+	version = flag.Bool("version", false, "Print version information")
 )
 
-/*
-func init() {
-	crypto.RegisterHash(crypto.GOSTR34112012256, New)
-}
-*/
-
-func New() hash.Hash {
-	return gost34112012.New(32)
+func main() {
+	flag.Parse()
+	if *version {
+		fmt.Println(gogost.Version)
+		return
+	}
+	h := gost34112012256.New()
+	io.Copy(h, os.Stdin)
+	fmt.Println(hex.EncodeToString(h.Sum(nil)))
 }

@@ -20,7 +20,7 @@ import (
 	"hash"
 	"testing"
 
-	"cypherpunks.ru/gogost/gost28147"
+	"go.cypherpunks.ru/gogost/v4/gost28147"
 	"golang.org/x/crypto/pbkdf2"
 )
 

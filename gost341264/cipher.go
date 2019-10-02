@@ -17,7 +17,7 @@
 package gost341264
 
 import (
-	"cypherpunks.ru/gogost/gost28147"
+	"go.cypherpunks.ru/gogost/v4/gost28147"
 )
 
 const (

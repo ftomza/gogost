@@ -13,31 +13,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// Command-line 34.11-2012 256-bit hash function.
-package main
+package gost3410
 
 import (
-	"encoding/hex"
-	"flag"
-	"fmt"
-	"io"
-	"os"
+	"errors"
+	"math/big"
 
-	"cypherpunks.ru/gogost"
-	"cypherpunks.ru/gogost/gost34112012256"
+	"go.cypherpunks.ru/gogost/v4/gost28147"
+	"go.cypherpunks.ru/gogost/v4/gost341194"
 )
 
-var (
-	version = flag.Bool("version", false, "Print version information")
-)
-
-func main() {
-	flag.Parse()
-	if *version {
-		fmt.Println(gogost.Version)
-		return
+// RFC 4357 VKO GOST R 34.10-2001 key agreement function.
+// UKM is user keying material, also called VKO-factor.
+func (prv *PrivateKey) KEK2001(pub *PublicKey, ukm *big.Int) ([]byte, error) {
+	if prv.Mode != Mode2001 {
+		return nil, errors.New("KEK2001 can not be used in Mode2012")
 	}
-	h := gost34112012256.New()
-	io.Copy(h, os.Stdin)
-	fmt.Println(hex.EncodeToString(h.Sum(nil)))
+	key, err := prv.KEK(pub, ukm)
+	if err != nil {
+		return nil, err
+	}
+	h := gost341194.New(&gost28147.SboxIdGostR341194CryptoProParamSet)
+	h.Write(key)
+	return h.Sum(key[:0]), nil
 }

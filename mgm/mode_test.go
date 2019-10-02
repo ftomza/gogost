@@ -22,8 +22,8 @@ import (
 	"testing"
 	"testing/quick"
 
-	"cypherpunks.ru/gogost/gost3412128"
-	"cypherpunks.ru/gogost/gost341264"
+	"go.cypherpunks.ru/gogost/v4/gost3412128"
+	"go.cypherpunks.ru/gogost/v4/gost341264"
 )
 
 func TestVector(t *testing.T) {

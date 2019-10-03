@@ -34,12 +34,12 @@ import (
 
 func main() {
     h := gost34112012256.New()
-    h.Write([]byte("hello world"))
+    h.Write([]byte("hello world\n"))
     fmt.Println(hex.EncodeToString(h.Sum(nil)))
 }
 EOF
 $ go run main.go
-c600fd9dd049cf8abd2f5b32e840d2cb0e41ea44de1c155dcd88dc84fe58a855
+f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end verbatim
 
 GoGOST is also @command{go get}-able. For example to use

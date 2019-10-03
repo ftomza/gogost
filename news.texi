@@ -12,8 +12,10 @@
         @code{CurveIdtc26gost34102012256paramSetD} curve aliases
     @item Forbid any later GNU GPL version autousage
         (project's licence now is GNU GPLv3 only)
-    @item Project now is @command{go get}-able:
-        @command{go get go.cypherpunks.ru/gogost/v4}
+    @item Project now is @command{go get}-able and uses
+        @code{go.cypherpunks.ru} namespace:
+        @command{go get go.cypherpunks.ru/gogost},
+        @command{go get go.cypherpunks.ru/gogost/cmd/streebog@{256,512@}}.
     @end itemize
 
 @anchor{Release 4.0}

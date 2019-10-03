@@ -7,7 +7,7 @@ release=$1
 
 git clone . $tmp/gogost-$release
 cd $tmp/gogost-$release
-git checkout $release
+git checkout v$release
 
 mod_name=$(sed -n 's/^module //p' go.mod)
 crypto_mod_path=$(sed -n 's#^require \(golang.org/x/crypto\) \(.*\)$#\1@\2#p' go.mod)

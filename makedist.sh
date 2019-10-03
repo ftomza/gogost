@@ -30,7 +30,7 @@ mkdir -p src/golang.org/x/crypto
     tar xfC - src/golang.org/x/crypto
 
 find . -name .git -type d | xargs rm -fr
-rm -f www* news.texi style.css makedist* TODO
+rm -f *.texi www.mk style.css makedist* TODO
 
 find . -type d -exec chmod 700 {} \;
 find . -type f -exec chmod 600 {} \;

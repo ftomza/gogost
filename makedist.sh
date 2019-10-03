@@ -22,7 +22,7 @@ mv \
     gost341264 \
     gost3413 \
     mgm \
-    internal gogost.go go.mod go.sum src/$mod_name
+    cmd internal gogost.go go.mod go.sum src/$mod_name
 
 mkdir -p src/golang.org/x/crypto
 ( cd $GOPATH/pkg/mod/$crypto_mod_path ; \

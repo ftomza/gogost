@@ -9,14 +9,28 @@ git clone . $tmp/gogost-$release
 cd $tmp/gogost-$release
 git checkout $release
 
-crypto_path=src/cypherpunks.ru/gogost/vendor/golang.org/x/crypto
-mkdir -p $crypto_path
-( cd $cur/gopath/pkg/mod/golang.org/x/crypto@v0.0.0-20190701094942-4def268fd1a4 ; \
+mod_name=$(sed -n 's/^module //p' go.mod)
+crypto_mod_path=$(sed -n 's#^require \(golang.org/x/crypto\) \(.*\)$#\1@\2#p' go.mod)
+mkdir -p src/$mod_name
+mv \
+    gost28147 \
+    gost3410 \
+    gost34112012256 \
+    gost34112012512 \
+    gost341194 \
+    gost3412128 \
+    gost341264 \
+    gost3413 \
+    mgm \
+    internal gogost.go go.mod go.sum src/$mod_name
+
+mkdir -p src/golang.org/x/crypto
+( cd $GOPATH/pkg/mod/$crypto_mod_path ; \
     tar cf - AUTHORS CONTRIBUTORS LICENSE PATENTS README.md pbkdf2 hkdf ) |
-    tar xfC - $crypto_path
+    tar xfC - src/golang.org/x/crypto
 
 find . -name .git -type d | xargs rm -fr
-rm -f www* makedist* TODO
+rm -f www* news.texi style.css makedist* TODO
 
 find . -type d -exec chmod 700 {} \;
 find . -type f -exec chmod 600 {} \;

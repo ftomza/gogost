@@ -5,12 +5,12 @@ Preferable way is to download tarball with the signature from
 website and, for example, run tests with benchmarks:
 
 @verbatim
-% wget http://gogost.cypherpunks.ru/gogost-4.0.tar.xz
-% wget http://gogost.cypherpunks.ru/gogost-4.0.tar.xz.sig
-% gpg --verify gogost-4.0.tar.xz.sig gogost-4.0.tar.xz
-% xz -d < gogost-4.0.tar.xz | tar xf -
-% make -C gogost-4.0 all bench
-% echo hello world | ./gogost-4.0/streebog256
+$ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz
+$ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz.sig
+$ gpg --verify gogost-4.1.0.tar.xz.sig gogost-4.1.0.tar.xz
+$ xz -d < gogost-4.1.0.tar.xz | tar xf -
+$ make -C gogost-4.1.0 all bench
+$ echo hello world | ./gogost-4.1.0/streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end verbatim
 
@@ -18,17 +18,18 @@ And then you can include its source code in your project for example
 like this:
 
 @verbatim
-% mkdir -p myproj/src
-% export GOPATH=$PWD/myproj
-% cd myproj/src
-% cat > main.go <<EOF
+$ mkdir -p myproj/src
+$ cp -r gogost-4.1.0/src/go.cypherpunks.ru myproj/src
+$ export GOPATH=$PWD/myproj
+$ cd myproj/src
+$ cat > main.go <<EOF
 package main
 
 import (
     "encoding/hex"
     "fmt"
 
-    "cypherpunks.ru/gogost/gost34112012256"
+    "go.cypherpunks.ru/gogost/v4/gost34112012256"
 )
 
 func main() {
@@ -37,9 +38,14 @@ func main() {
     fmt.Println(hex.EncodeToString(h.Sum(nil)))
 }
 EOF
-% cp -r ../../gogost-4.0/src/cypherpunks.ru .
-% go run main.go
+$ go run main.go
 c600fd9dd049cf8abd2f5b32e840d2cb0e41ea44de1c155dcd88dc84fe58a855
+@end verbatim
+
+GoGOST is also @command{go get}-able. For example to use
+@command{streebog256} utility:
+@verbatim
+$ go get go.cypherpunks.ru/gogost/cmd/streebog256
 @end verbatim
 
 @multitable {XXXXX} {XXXX-XX-XX} {XXXX KiB} {link sign} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
@@ -93,8 +99,8 @@ uid   GoGOST releases <gogost at cypherpunks dot ru>
 
 @item
 @verbatim
-% gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
-% gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
+$ gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
+$ gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
 @end verbatim
 
 @item

@@ -1,28 +1,29 @@
 Preferable way is to download tarball with the signature from official
 website and, for example, run tests with benchmarks:
 
-    % wget http://gogost.cypherpunks.ru/gogost-1.1.tar.xz
-    % wget http://gogost.cypherpunks.ru/gogost-1.1.tar.xz.sig
-    % gpg --verify gogost-1.1.tar.xz.sig gogost-1.1.tar.xz
-    % xz -d < gogost-1.1.tar.xz | tar xf -
-    % make -C gogost-1.1 all bench
-    % echo hello world | ./gogost-1.1/streebog256
+    $ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz
+    $ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz.sig
+    $ gpg --verify gogost-4.1.0.tar.xz.sig gogost-4.1.0.tar.xz
+    $ xz -d < gogost-4.1.0.tar.xz | tar xf -
+    $ make -C gogost-4.1.0 all bench
+    $ echo hello world | ./gogost-4.1.0/streebog256
     f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 
 And then you can include its source code in your project for example
 like this:
 
-    % mkdir -p myproj/src
-    % export GOPATH=$PWD/myproj
-    % cd myproj/src
-    % cat > main.go <<EOF
+    $ mkdir -p myproj/src
+    $ cp -r gogost-4.1.0/src/go.cypherpunks.ru myproj/src
+    $ export GOPATH=$PWD/myproj
+    $ cd myproj/src
+    $ cat > main.go <<EOF
     package main
 
     import (
         "encoding/hex"
         "fmt"
 
-        "cypherpunks.ru/gogost/gost34112012256"
+        "go.cypherpunks.ru/gogost/v4/gost34112012256"
     )
 
     func main() {
@@ -31,9 +32,12 @@ like this:
         fmt.Println(hex.EncodeToString(h.Sum(nil)))
     }
     EOF
-    % cp -r ../../gogost-1.1/src/cypherpunks.ru .
-    % go run main.go
+    $ go run main.go
     c600fd9dd049cf8abd2f5b32e840d2cb0e41ea44de1c155dcd88dc84fe58a855
+
+GoGOST is also go-get-able. For example to use streebog256 utility:
+
+    $ go get go.cypherpunks.ru/gogost/cmd/streebog256
 
 You have to verify downloaded tarballs integrity and authenticity to be
 sure that you retrieved trusted and untampered software. GNU Privacy
@@ -48,5 +52,5 @@ resources.
     uid   GoGOST releases <gogost at cypherpunks dot ru>
 
     Look in PUBKEY.asc file.
-    % gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
-    % gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
+    $ gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
+    $ gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru

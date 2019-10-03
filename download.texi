@@ -51,6 +51,11 @@ $ go get go.cypherpunks.ru/gogost/cmd/streebog256
 @multitable {XXXXX} {XXXX-XX-XX} {XXXX KiB} {link sign} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
 @headitem Version @tab Date @tab Size @tab Tarball @tab SHA256 checksum @tab Streebog-256 checksum
 
+@item @ref{Release 4.1.0, 4.1.0} @tab 2019-10-03 @tab 55 KiB
+@tab @url{gogost-4.1.0.tar.xz, link} @url{gogost-4.1.0.tar.xz.sig, sign}
+@tab @code{F2FEF2E0 ADEB5742 FA2B3338 64E8B91B 3CCAA97D 5BA62177 21E08A11 F1FA8133}
+@tab @code{72e0d52aa25158ab1bb45e5498ce703b516c616b71101b74d5ee259f516c4e91}
+
 @item @ref{Release 4.0, 4.0} @tab 2019-08-12 @tab 56 KiB
 @tab @url{gogost-4.0.tar.xz, link} @url{gogost-4.0.tar.xz.sig, sign}
 @tab @code{4899B930 2110C9A9 592821D6 B206146F 2A66FC5A 3DEE9D6E 11F5EA51 72FEE6E6}

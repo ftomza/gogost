@@ -3,8 +3,8 @@
 
 @table @strong
 
-@anchor{Release 4.1}
-@item 4.1
+@anchor{Release 4.1.0}
+@item 4.1.0
     @itemize
     @item @code{ESPTREE} implementation
     @item @code{CurveIdtc26gost34102012256paramSetB},
@@ -12,8 +12,8 @@
         @code{CurveIdtc26gost34102012256paramSetD} curve aliases
     @item Forbid any later GNU GPL version autousage
         (project's licence now is GNU GPLv3 only)
-    @item Project now is go-get-able: @command{go get go.cypherpunks.ru/gogost/v4}
-
+    @item Project now is @command{go get}-able:
+        @command{go get go.cypherpunks.ru/gogost/v4}
     @end itemize
 
 @anchor{Release 4.0}

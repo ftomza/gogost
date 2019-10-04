@@ -2,5 +2,5 @@
 package gogost
 
 var (
-	Version string
+	Version string = "UNKNOWN"
 )

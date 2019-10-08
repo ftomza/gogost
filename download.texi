@@ -42,12 +42,6 @@ $ go run main.go
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end verbatim
 
-GoGOST is also @command{go get}-able. For example to use
-@command{streebog256} utility:
-@verbatim
-$ go get go.cypherpunks.ru/gogost/cmd/streebog256
-@end verbatim
-
 @multitable {XXXXX} {XXXX-XX-XX} {XXXX KiB} {link sign} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
 @headitem Version @tab Date @tab Size @tab Tarball @tab SHA256 checksum @tab Streebog-256 checksum
 
@@ -112,6 +106,26 @@ $ gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
 @verbatiminclude PUBKEY.asc
 
 @end itemize
+
+GoGOST is also @command{go get}-able. For example to use
+@command{streebog256} utility:
+@verbatim
+$ go get go.cypherpunks.ru/gogost/cmd/streebog256
+@end verbatim
+
+@code{go.cypherpunks.ru} uses @url{https://www.cacert.org/, CACert.org}
+certificate authority, that is not included by default in some operating
+system distributions and probably you have to install it in your system,
+because @command{go get} uses HTTPS connections. If you have issues
+using either @code{sum.golang.org} or @code{proxy.golang.org}, then you
+can disable their usage with @env{GOPRIVATE=go.cypherpunks.ru/gogost}
+environment variable.
+
+Also you can use @code{replace} feature inside your @file{go.mod}, like:
+@verbatim
+require go.cypherpunks.ru/gogost/v4 v4.1.0
+replace go.cypherpunks.ru/gogost/v4 => /home/stargrave/gogost-4.1.0/src/go.cypherpunks.ru/gogost/v4
+@end verbatim
 
 You can obtain development source code by cloning
 @url{http://git-scm.com/, Git}

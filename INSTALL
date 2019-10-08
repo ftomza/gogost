@@ -35,10 +35,6 @@ like this:
     $ go run main.go
     f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 
-GoGOST is also go-get-able. For example to use streebog256 utility:
-
-    $ go get go.cypherpunks.ru/gogost/cmd/streebog256
-
 You have to verify downloaded tarballs integrity and authenticity to be
 sure that you retrieved trusted and untampered software. GNU Privacy
 Guard is used for that purpose.
@@ -54,3 +50,19 @@ resources.
     Look in PUBKEY.asc file.
     $ gpg --auto-key-locate dane --locate-keys gogost at cypherpunks dot ru
     $ gpg --auto-key-locate wkd --locate-keys gogost at cypherpunks dot ru
+
+GoGOST is also go-get-able. For example to use streebog256 utility:
+
+    $ go get go.cypherpunks.ru/gogost/cmd/streebog256
+
+go.cypherpunks.ru uses CACert.org certificate authority, that is not
+included by default in some operating system distributions and probably
+you have to install it in your system, because "go get" uses HTTPS
+connections. If you have issues using either sum.golang.org or
+proxy.golang.org, then you can disable their usage with
+GOPRIVATE=go.cypherpunks.ru/gogost environment variable.
+
+Also you can use "replace" feature inside your go.mod, like:
+
+    require go.cypherpunks.ru/gogost/v4 v4.1.0
+    replace go.cypherpunks.ru/gogost/v4 => /home/stargrave/gogost-4.1.0/src/go.cypherpunks.ru/gogost/v4

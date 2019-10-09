@@ -127,6 +127,5 @@ require go.cypherpunks.ru/gogost/v4 v4.1.0
 replace go.cypherpunks.ru/gogost/v4 => /home/stargrave/gogost-4.1.0/src/go.cypherpunks.ru/gogost/v4
 @end verbatim
 
-You can obtain development source code by cloning
-@url{http://git-scm.com/, Git}
-@url{https://git.cypherpunks.ru/cgit.cgi/gogost.git/}.
+You can obtain development source code with
+@command{git clone git://git.cypherpunks.ru/gogost.git}.

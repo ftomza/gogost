@@ -6,7 +6,7 @@
 @anchor{Release 4.1.0}
 @item 4.1.0
     @itemize
-    @item @code{ESPTREE} implementation
+    @item @code{ESPTREE}/@code{IKETREE} implementation
     @item @code{CurveIdtc26gost34102012256paramSetB},
         @code{CurveIdtc26gost34102012256paramSetC},
         @code{CurveIdtc26gost34102012256paramSetD} curve aliases

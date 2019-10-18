@@ -21,6 +21,8 @@ GOST is GOvernment STandard of Russian Federation (and Soviet Union).
 * MGM AEAD mode for 64 and 128 bit ciphers
 * TLSTREE keyscheduling function
 * ESPTREE/IKETREE (IKE* is the same as ESP*) keyscheduling function
+* PRF_IPSEC_PRFPLUS_GOSTR3411_2012_{256,512} and generic prf+ functions
+  (Р 50.1.111-2016 with IKEv2 RFC 7296)
 
 Known problems:
 

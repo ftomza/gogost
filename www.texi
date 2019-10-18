@@ -51,6 +51,9 @@ Currently supported algorithms are:
 @item MGM AEAD mode for 64 and 128 bit ciphers
 @item TLSTREE keyscheduling function
 @item ESPTREE/IKETREE (IKE* is the same as ESP*) keyscheduling function
+@item @code{PRF_IPSEC_PRFPLUS_GOSTR3411_2012_@{256,512@}} and generic
+    @code{prf+} functions (Р 50.1.111-2016 with IKEv2
+    @url{https://tools.ietf.org/html/rfc5831.html, RFC 7296})
 @end itemize
 
 Please send questions, bug reports and patches to

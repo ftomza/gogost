@@ -79,7 +79,7 @@ func NewCurve(p, q, a, b, x, y, e, d *big.Int) (*Curve, error) {
 	r2.Mod(r2, c.P)
 	c.pos(r2)
 	if r1.Cmp(r2) != 0 {
-		return nil, errors.New("Invalid curve parameters")
+		return nil, errors.New("gogost/gost3410: invalid curve parameters")
 	}
 	if e != nil && d != nil {
 		c.E = e
@@ -131,7 +131,7 @@ func (c *Curve) add(p1x, p1y, p2x, p2y *big.Int) {
 
 func (c *Curve) Exp(degree, xS, yS *big.Int) (*big.Int, *big.Int, error) {
 	if degree.Cmp(zero) == 0 {
-		return nil, nil, errors.New("Bad degree value")
+		return nil, nil, errors.New("gogost/gost3410: zero degree value")
 	}
 	dg := big.NewInt(0).Sub(degree, bigInt1)
 	tx := big.NewInt(0).Set(xS)

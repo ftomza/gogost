@@ -21,6 +21,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"fmt"
 )
 
 const (
@@ -426,11 +427,12 @@ func (h *Hash) MarshalBinary() (data []byte, err error) {
 }
 
 func (h *Hash) UnmarshalBinary(data []byte) error {
-	if len(data) < len(MarshaledName)+1+8+3*BlockSize {
-		return errors.New("too short data")
+	expectedLen := len(MarshaledName) + 1 + 8 + 3*BlockSize
+	if len(data) < expectedLen {
+		return fmt.Errorf("gogost/internal/gost34112012: len(data) != %d", expectedLen)
 	}
 	if !bytes.HasPrefix(data, []byte(MarshaledName)) {
-		return errors.New("no hash name prefix")
+		return errors.New("gogost/internal/gost34112012: no hash name prefix")
 	}
 	idx := len(MarshaledName)
 	h.size = int(data[idx])

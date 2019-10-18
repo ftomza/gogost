@@ -27,7 +27,7 @@ import (
 // UKM is user keying material, also called VKO-factor.
 func (prv *PrivateKey) KEK2001(pub *PublicKey, ukm *big.Int) ([]byte, error) {
 	if prv.Mode != Mode2001 {
-		return nil, errors.New("KEK2001 can not be used in Mode2012")
+		return nil, errors.New("gogost/gost3410: KEK2001 can not be used in Mode2012")
 	}
 	key, err := prv.KEK(pub, ukm)
 	if err != nil {

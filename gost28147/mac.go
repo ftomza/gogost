@@ -42,10 +42,10 @@ type MAC struct {
 // following ones are fed to Write function.
 func (c *Cipher) NewMAC(size int, iv []byte) (*MAC, error) {
 	if size == 0 || size > 8 {
-		return nil, errors.New("Invalid tag size")
+		return nil, errors.New("gogost/gost28147: invalid tag size")
 	}
 	if len(iv) != BlockSize {
-		return nil, errors.New("iv length is not equal to blocksize")
+		return nil, errors.New("gogost/gost28147: len(iv) != 8")
 	}
 	m := MAC{c: c, size: size, iv: iv}
 	n2, n1 := block2nvs(iv)

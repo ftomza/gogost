@@ -61,10 +61,10 @@ type MGM struct {
 func NewMGM(cipher cipher.Block, tagSize int) (cipher.AEAD, error) {
 	blockSize := cipher.BlockSize()
 	if !(blockSize == 8 || blockSize == 16) {
-		return nil, errors.New("MGM supports only 64/128 blocksizes")
+		return nil, errors.New("gogost/mgm: only 64/128 blocksizes allowed")
 	}
 	if tagSize < 4 || tagSize > blockSize {
-		return nil, errors.New("invalid tag size")
+		return nil, errors.New("gogost/mgm: invalid tag size")
 	}
 	mgm := MGM{
 		maxSize:   uint64(1<<uint(blockSize*8/2) - 1),
@@ -242,7 +242,7 @@ func (mgm *MGM) Open(dst, nonce, ciphertext, additionalData []byte) ([]byte, err
 	copy(mgm.icn, nonce)
 	mgm.auth(mgm.sum, ct, additionalData)
 	if !hmac.Equal(mgm.sum[:mgm.tagSize], ciphertext[len(ciphertext)-mgm.tagSize:]) {
-		return nil, errors.New("invalid authentication tag")
+		return nil, errors.New("gogost/mgm: invalid authentication tag")
 	}
 	mgm.crypt(out, ct)
 	return ret, nil

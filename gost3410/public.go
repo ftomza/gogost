@@ -16,7 +16,7 @@
 package gost3410
 
 import (
-	"errors"
+	"fmt"
 	"math/big"
 )
 
@@ -30,7 +30,7 @@ type PublicKey struct {
 func NewPublicKey(curve *Curve, mode Mode, raw []byte) (*PublicKey, error) {
 	key := make([]byte, 2*int(mode))
 	if len(raw) != len(key) {
-		return nil, errors.New("Invalid public key length")
+		return nil, fmt.Errorf("gogost/gost3410: len(key) != %d", len(key))
 	}
 	for i := 0; i < len(key); i++ {
 		key[i] = raw[len(raw)-i-1]
@@ -54,11 +54,14 @@ func (pub *PublicKey) Raw() []byte {
 
 func (pub *PublicKey) VerifyDigest(digest, signature []byte) (bool, error) {
 	if len(signature) != 2*int(pub.Mode) {
-		return false, errors.New("Invalid signature length")
+		return false, fmt.Errorf("gogost/gost3410: len(signature) != %d", 2*int(pub.Mode))
 	}
 	s := bytes2big(signature[:pub.Mode])
 	r := bytes2big(signature[pub.Mode:])
-	if r.Cmp(zero) <= 0 || r.Cmp(pub.C.Q) >= 0 || s.Cmp(zero) <= 0 || s.Cmp(pub.C.Q) >= 0 {
+	if r.Cmp(zero) <= 0 ||
+		r.Cmp(pub.C.Q) >= 0 ||
+		s.Cmp(zero) <= 0 ||
+		s.Cmp(pub.C.Q) >= 0 {
 		return false, nil
 	}
 	e := bytes2big(digest)

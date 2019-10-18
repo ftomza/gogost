@@ -18,6 +18,7 @@ package gost3410
 import (
 	"crypto"
 	"errors"
+	"fmt"
 	"io"
 	"math/big"
 )
@@ -30,7 +31,7 @@ type PrivateKey struct {
 
 func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
 	if len(raw) != int(mode) {
-		return nil, errors.New("Invalid private key length")
+		return nil, fmt.Errorf("gogost/gost3410: len(key) != %d", mode)
 	}
 	key := make([]byte, int(mode))
 	for i := 0; i < len(key); i++ {
@@ -38,7 +39,7 @@ func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
 	}
 	k := bytes2big(key)
 	if k.Cmp(zero) == 0 {
-		return nil, errors.New("Zero private key")
+		return nil, errors.New("gogost/gost3410: zero private key")
 	}
 	return &PrivateKey{curve, mode, k}, nil
 }

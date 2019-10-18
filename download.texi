@@ -5,12 +5,12 @@ Preferable way is to download tarball with the signature from
 website and, for example, run tests with benchmarks:
 
 @verbatim
-$ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz
-$ wget http://gogost.cypherpunks.ru/gogost-4.1.0.tar.xz.sig
-$ gpg --verify gogost-4.1.0.tar.xz.sig gogost-4.1.0.tar.xz
-$ xz -d < gogost-4.1.0.tar.xz | tar xf -
-$ make -C gogost-4.1.0 all bench
-$ echo hello world | ./gogost-4.1.0/streebog256
+$ wget http://gogost.cypherpunks.ru/gogost-4.2.0.tar.xz
+$ wget http://gogost.cypherpunks.ru/gogost-4.2.0.tar.xz.sig
+$ gpg --verify gogost-4.2.0.tar.xz.sig gogost-4.2.0.tar.xz
+$ xz -d < gogost-4.2.0.tar.xz | tar xf -
+$ make -C gogost-4.2.0 all bench
+$ echo hello world | ./gogost-4.2.0/streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end verbatim
 
@@ -19,7 +19,7 @@ like this:
 
 @verbatim
 $ mkdir -p myproj/src
-$ cp -r gogost-4.1.0/src/go.cypherpunks.ru myproj/src
+$ cp -r gogost-4.2.0/src/go.cypherpunks.ru myproj/src
 $ export GOPATH=$PWD/myproj
 $ cd myproj/src
 $ cat > main.go <<EOF
@@ -123,8 +123,8 @@ environment variable.
 
 Also you can use @code{replace} feature inside your @file{go.mod}, like:
 @verbatim
-require go.cypherpunks.ru/gogost/v4 v4.1.0
-replace go.cypherpunks.ru/gogost/v4 => /home/stargrave/gogost-4.1.0/src/go.cypherpunks.ru/gogost/v4
+require go.cypherpunks.ru/gogost/v4 v4.2.0
+replace go.cypherpunks.ru/gogost/v4 => /home/stargrave/gogost-4.2.0/src/go.cypherpunks.ru/gogost/v4
 @end verbatim
 
 You can obtain development source code with

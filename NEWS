@@ -1,5 +1,9 @@
+4.2.0:
+    * PRF_IPSEC_PRFPLUS_GOSTR3411_2012_{256,512} implementation
+    * Generic prf+ function (taken from IKEv2) implementation
+
 4.1.0:
-    * ESPTREE implementation
+    * ESPTREE/IKETREE implementation
     * CurveIdtc26gost34102012256paramSetB, CurveIdtc26gost34102012256paramSetC,
       CurveIdtc26gost34102012256paramSetD curve aliases
     * Forbid any later GNU GPL version autousage

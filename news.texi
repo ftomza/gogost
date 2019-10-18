@@ -3,6 +3,14 @@
 
 @table @strong
 
+@anchor{Release 4.2.0}
+@item 4.2.0
+    @itemize
+    @item @code{PRF_IPSEC_PRFPLUS_GOSTR3411_2012_@{256,512@}} implementation
+    @item Generic @code{prf+} function (taken from IKEv2
+        (@url{https://tools.ietf.org/html/rfc5831.html, RFC 7296}))
+    @end itemize
+
 @anchor{Release 4.1.0}
 @item 4.1.0
     @itemize

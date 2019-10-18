@@ -22,6 +22,7 @@ mv \
     gost341264 \
     gost3413 \
     mgm \
+    prfplus \
     cmd internal gogost.go go.mod go.sum src/$mod_name
 
 mkdir -p src/golang.org/x/crypto

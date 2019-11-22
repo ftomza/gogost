@@ -33,8 +33,8 @@ mkdir -p src/golang.org/x/crypto
 find . -name .git -type d | xargs rm -fr
 rm -f *.texi www.mk style.css makedist* TODO
 
-find . -type d -exec chmod 700 {} \;
-find . -type f -exec chmod 600 {} \;
+find . -type d -exec chmod 755 {} \;
+find . -type f -exec chmod 644 {} \;
 
 cd ..
 tar cvf gogost-"$release".tar --uid=0 --gid=0 --numeric-owner gogost-"$release"

@@ -1,3 +1,6 @@
+GOPATH != pwd
+VERSION != cat VERSION
+
 MOD = go.cypherpunks.ru/gogost/v4
 LDFLAGS = -X $(MOD).Version=$(VERSION)
 

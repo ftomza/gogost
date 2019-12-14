@@ -1,8 +1,8 @@
-all: gogost.html
-
 MAKEINFO ?= makeinfo
 
 CSS != cat style.css
+
+all: gogost.html
 
 gogost.html: *.texi
 	rm -f gogost.html/*.html

@@ -2,10 +2,10 @@
 @documentencoding UTF-8
 @settitle GoGOST
 
-@set VERSION 4.2.0
+@set VERSION 4.2.1
 
 @copying
-Copyright @copyright{} 2015-2019 @email{stargrave@@stargrave.org, Sergey Matveev}
+Copyright @copyright{} 2015-2020 @email{stargrave@@stargrave.org, Sergey Matveev}
 @end copying
 
 @node Top

@@ -10,7 +10,7 @@ website and, for example, run tests with benchmarks:
 $ [fetch|wget] http://gogost.cypherpunks.ru/gogost-@value{VERSION}.tar.xz
 $ [fetch|wget] http://gogost.cypherpunks.ru/gogost-@value{VERSION}.tar.xz.sig
 $ gpg --verify gogost-@value{VERSION}.tar.xz.sig gogost-@value{VERSION}.tar.xz
-$ xz -d < gogost-@value{VERSION}.tar.xz | tar xf -
+$ xz --decompress --stdout gogost-@value{VERSION}.tar.xz | tar xf -
 $ make -C gogost-@value{VERSION} all bench
 $ echo hello world | gogost-@value{VERSION}/streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d

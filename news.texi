@@ -3,6 +3,10 @@
 
 @table @strong
 
+@anchor{Release 4.2.1}
+@item 4.2.1
+    Dummy release. More nicer tarballs.
+
 @anchor{Release 4.2.0}
 @item 4.2.0
     @itemize

@@ -30,8 +30,33 @@ mkdir -p src/golang.org/x/crypto
     tar cf - AUTHORS CONTRIBUTORS LICENSE PATENTS README.md pbkdf2 hkdf ) |
     tar xfC - src/golang.org/x/crypto
 
+cat > download.texi <<EOF
+You can obtain releases source code prepared tarballs on
+@url{http://gocheese.cypherpunks.ru/}.
+EOF
+
+texi=$(mktemp)
+cat > $texi <<EOF
+\input texinfo
+@documentencoding UTF-8
+@settitle INSTALL
+@include install.texi
+@bye
+EOF
+makeinfo --plaintext -o INSTALL $texi
+rm $texi
+
+cat > $texi <<EOF
+\input texinfo
+@documentencoding UTF-8
+@settitle NEWS
+@include news.texi
+@bye
+EOF
+makeinfo --plaintext -o NEWS $texi
+
 find . -name .git -type d | xargs rm -fr
-rm -f *.texi www.mk style.css makedist* TODO
+rm -f *.texi www.mk style.css makedist.sh TODO
 
 find . -type d -exec chmod 755 {} \;
 find . -type f -exec chmod 644 {} \;

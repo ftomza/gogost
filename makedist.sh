@@ -55,6 +55,15 @@ cat > $texi <<EOF
 EOF
 makeinfo --plaintext -o NEWS $texi
 
+cat > $texi <<EOF
+\input texinfo
+@documentencoding UTF-8
+@settitle FAQ
+@include faq.texi
+@bye
+EOF
+makeinfo --plaintext -o NEWS $texi
+
 find . -name .git -type d | xargs rm -fr
 rm -f *.texi www.mk style.css makedist.sh TODO
 

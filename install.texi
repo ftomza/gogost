@@ -16,6 +16,8 @@ $ echo hello world | gogost-@value{VERSION}/streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
 @end example
 
+@include download.texi
+
 And then you can include its source code in your project for example
 like this:
 

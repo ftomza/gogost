@@ -7,7 +7,7 @@
 
 @item My signature is not validated by other implementations. What is wrong?
 
-Try to reverse it (@code{sign[::-1]}).
+Try to reverse it (like @code{sign[::-1]} in Python).
 Try to swap its halves (@code{sign[len(sign)/2:] + sign[:len(sign)/2]}).
 Try to reverse its swapped halves too.
 
@@ -15,7 +15,7 @@ Try to reverse its swapped halves too.
 
 @item My signature is @strong{still} not validated by other implementations!
 
-Try to reverse digest you are signing/verifying (@code{dgst[::-1]}).
+Try to reverse digest you are signing/verifying (like @code{dgst[::-1]} in Python).
 
 @value{ItIsGOSTBaby}!
 

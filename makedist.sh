@@ -62,7 +62,7 @@ cat > $texi <<EOF
 @include faq.texi
 @bye
 EOF
-makeinfo --plaintext -o NEWS $texi
+makeinfo --plaintext -o FAQ $texi
 
 find . -name .git -type d | xargs rm -fr
 rm -f *.texi www.mk style.css makedist.sh TODO

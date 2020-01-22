@@ -38,6 +38,8 @@ func main() {
 		return
 	}
 	h := gost34112012256.New()
-	io.Copy(h, os.Stdin)
+	if _, err := io.Copy(h, os.Stdin); err != nil {
+		panic(err)
+	}
 	fmt.Println(hex.EncodeToString(h.Sum(nil)))
 }

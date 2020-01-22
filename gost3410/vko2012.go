@@ -30,7 +30,9 @@ func (prv *PrivateKey) KEK2012256(pub *PublicKey, ukm *big.Int) ([]byte, error) 
 		return nil, err
 	}
 	h := gost34112012256.New()
-	h.Write(key)
+	if _, err = h.Write(key); err != nil {
+		return nil, err
+	}
 	return h.Sum(key[:0]), nil
 }
 
@@ -42,6 +44,8 @@ func (prv *PrivateKey) KEK2012512(pub *PublicKey, ukm *big.Int) ([]byte, error) 
 		return nil, err
 	}
 	h := gost34112012512.New()
-	h.Write(key)
+	if _, err = h.Write(key); err != nil {
+		return nil, err
+	}
 	return h.Sum(key[:0]), nil
 }

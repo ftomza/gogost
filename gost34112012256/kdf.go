@@ -29,12 +29,24 @@ func NewKDF(key []byte) *KDF {
 }
 
 func (kdf *KDF) Derive(dst, label, seed []byte) (r []byte) {
-	kdf.h.Write([]byte{0x01})
-	kdf.h.Write(label)
-	kdf.h.Write([]byte{0x00})
-	kdf.h.Write(seed)
-	kdf.h.Write([]byte{0x01})
-	kdf.h.Write([]byte{0x00})
+	if _, err := kdf.h.Write([]byte{0x01}); err != nil {
+		panic(err)
+	}
+	if _, err := kdf.h.Write(label); err != nil {
+		panic(err)
+	}
+	if _, err := kdf.h.Write([]byte{0x00}); err != nil {
+		panic(err)
+	}
+	if _, err := kdf.h.Write(seed); err != nil {
+		panic(err)
+	}
+	if _, err := kdf.h.Write([]byte{0x01}); err != nil {
+		panic(err)
+	}
+	if _, err := kdf.h.Write([]byte{0x00}); err != nil {
+		panic(err)
+	}
 	r = kdf.h.Sum(dst)
 	kdf.h.Reset()
 	return r

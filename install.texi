@@ -1,7 +1,7 @@
 @node Download
 @unnumbered Download
 
-@set VERSION 4.2.2
+@set VERSION 4.2.3
 
 Preferable way is to download tarball with the signature from
 website and, for example, run tests with benchmarks:

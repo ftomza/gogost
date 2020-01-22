@@ -39,7 +39,9 @@ func (prf PRFIPsecPRFPlusGOSTR34112012) BlockSize() int {
 }
 
 func (prf PRFIPsecPRFPlusGOSTR34112012) Derive(salt []byte) []byte {
-	prf.h.Write(salt)
+	if _, err := prf.h.Write(salt); err != nil {
+		panic(err)
+	}
 	sum := prf.h.Sum(nil)
 	prf.h.Reset()
 	return sum

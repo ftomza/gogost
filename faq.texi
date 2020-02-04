@@ -19,7 +19,7 @@ Try to reverse digest you are signing/verifying (like @code{dgst[::-1]} in Pytho
 
 @value{ItIsGOSTBaby}!
 
-@item Everything above did not help me. Does PyGOST sucks?
+@item Everything above did not help me. Does GoGOST sucks?
 
 No way! You still have not tried to reverse your binary private key,
 public key and swap its halves.

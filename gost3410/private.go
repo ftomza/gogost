@@ -119,3 +119,38 @@ func (prv *PrivateKey) Public() crypto.PublicKey {
 	}
 	return pub
 }
+
+type PrivateKeyReverseDigest struct {
+	Prv *PrivateKey
+}
+
+func (prv *PrivateKeyReverseDigest) Public() crypto.PublicKey {
+	return prv.Prv.Public()
+}
+
+func (prv *PrivateKeyReverseDigest) Sign(rand io.Reader, digest []byte, opts crypto.SignerOpts) ([]byte, error) {
+	d := make([]byte, len(digest))
+	copy(d, digest)
+	reverse(d)
+	return prv.Prv.Sign(rand, d, opts)
+}
+
+type PrivateKeyReverseDigestAndSignature struct {
+	Prv *PrivateKey
+}
+
+func (prv *PrivateKeyReverseDigestAndSignature) Public() crypto.PublicKey {
+	return prv.Prv.Public()
+}
+
+func (prv *PrivateKeyReverseDigestAndSignature) Sign(rand io.Reader, digest []byte, opts crypto.SignerOpts) ([]byte, error) {
+	d := make([]byte, len(digest))
+	copy(d, digest)
+	reverse(d)
+	sign, err := prv.Prv.Sign(rand, d, opts)
+	if err != nil {
+		return sign, err
+	}
+	reverse(sign)
+	return sign, err
+}

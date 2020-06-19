@@ -3,6 +3,12 @@
 
 @table @strong
 
+@anchor{Release 4.2.4}
+@item 4.2.4
+    @code{gost3410.PrivateKeyReverseDigest} reversed digests and
+    @code{PrivateKeyReverseDigestAndSignature} with also reversed signatures
+    signers appeared for convenience.
+
 @anchor{Release 4.2.3}
 @item 4.2.3
     Panic on all possible hash @code{Write} errors.

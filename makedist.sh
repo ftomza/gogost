@@ -5,11 +5,12 @@ tmp=$(mktemp -d)
 release=$1
 [ -n "$release" ]
 
+redo-ifchange module-name streebog256
+mod_name=`cat module-name`
 git clone . $tmp/gogost-$release
 cd $tmp/gogost-$release
 git checkout v$release
 
-mod_name=$(sed -n 's/^module //p' go.mod)
 crypto_mod_path=$(sed -n 's#^require \(golang.org/x/crypto\) \(.*\)$#\1@\2#p' go.mod)
 mkdir -p src/$mod_name
 mv \
@@ -25,6 +26,10 @@ mv \
     prfplus \
     cmd internal gogost.go go.mod go.sum src/$mod_name
 
+rm module-name.do clean.do
+echo $mod_name > module-name
+find . -name "*.do" -exec perl -i -npe "s/^go/GOPATH=\`pwd\` go/" {} \;
+
 mkdir -p src/golang.org/x/crypto
 ( cd $GOPATH/pkg/mod/$crypto_mod_path ; \
     tar cf - AUTHORS CONTRIBUTORS LICENSE PATENTS README.md pbkdf2 hkdf ) |
@@ -32,7 +37,7 @@ mkdir -p src/golang.org/x/crypto
 
 cat > download.texi <<EOF
 You can obtain releases source code prepared tarballs on
-@url{http://gocheese.cypherpunks.ru/}.
+@url{http://gogost.cypherpunks.ru/}.
 EOF
 
 texi=$(mktemp)
@@ -65,7 +70,7 @@ EOF
 makeinfo --plaintext -o FAQ $texi
 
 find . -name .git -type d | xargs rm -fr
-rm -f *.texi www.mk style.css makedist.sh TODO
+rm -f *.texi www.do style.css makedist.sh TODO .gitignore
 
 find . -type d -exec chmod 755 {} \;
 find . -type f -exec chmod 644 {} \;

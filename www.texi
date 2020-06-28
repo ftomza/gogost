@@ -56,6 +56,9 @@ Currently supported algorithms are:
     @url{https://tools.ietf.org/html/rfc5831.html, RFC 7296})
 @end itemize
 
+Probably you could be interested in
+@url{//gostls13.cypherpunks.ru/, Go's support of GOST TLS 1.3}.
+
 Please send questions, bug reports and patches to
 @url{https://lists.cypherpunks.ru/mailman/listinfo/gost, gost}
 mailing list. Announcements also go to this mailing list.

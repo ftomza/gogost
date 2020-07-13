@@ -1,4 +1,4 @@
-module go.cypherpunks.ru/gogost/v4
+module gogost
 
 go 1.12
 

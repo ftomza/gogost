@@ -21,7 +21,7 @@ import (
 	"encoding/binary"
 	"math/big"
 
-	"go.cypherpunks.ru/gogost/v4/gost28147"
+	"gogost/gost28147"
 )
 
 const (

@@ -19,8 +19,8 @@ import (
 	"errors"
 	"math/big"
 
-	"go.cypherpunks.ru/gogost/v4/gost28147"
-	"go.cypherpunks.ru/gogost/v4/gost341194"
+	"gogost/gost28147"
+	"gogost/gost341194"
 )
 
 // RFC 4357 VKO GOST R 34.10-2001 key agreement function.

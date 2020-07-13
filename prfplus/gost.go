@@ -20,8 +20,8 @@ import (
 	"crypto/hmac"
 	"hash"
 
-	"go.cypherpunks.ru/gogost/v4/gost34112012256"
-	"go.cypherpunks.ru/gogost/v4/gost34112012512"
+	"gogost/gost34112012256"
+	"gogost/gost34112012512"
 )
 
 type PRFIPsecPRFPlusGOSTR34112012 struct{ h hash.Hash }

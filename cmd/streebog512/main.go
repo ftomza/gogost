@@ -23,8 +23,8 @@ import (
 	"io"
 	"os"
 
-	"gogost"
-	"gogost/gost34112012512"
+	"github.com/ftomza/gogost"
+	"github.com/ftomza/gogost/gost34112012512"
 )
 
 var (

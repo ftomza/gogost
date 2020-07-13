@@ -1,4 +1,4 @@
-module gogost
+module github.com/ftomza/gogost
 
 go 1.12
 

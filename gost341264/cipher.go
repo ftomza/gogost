@@ -17,7 +17,7 @@
 package gost341264
 
 import (
-	"gogost/gost28147"
+	"github.com/ftomza/gogost/gost28147"
 )
 
 const (

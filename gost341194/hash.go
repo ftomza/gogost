@@ -21,7 +21,7 @@ import (
 	"encoding/binary"
 	"math/big"
 
-	"gogost/gost28147"
+	"github.com/ftomza/gogost/gost28147"
 )
 
 const (

@@ -20,8 +20,8 @@ import (
 	"math/big"
 	"testing"
 
-	"gogost/gost3412128"
-	"gogost/gost341264"
+	"github.com/ftomza/gogost/gost3412128"
+	"github.com/ftomza/gogost/gost341264"
 )
 
 func BenchmarkMul64(b *testing.B) {

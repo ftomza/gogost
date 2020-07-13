@@ -22,7 +22,7 @@ import (
 	"testing"
 	"testing/quick"
 
-	"gogost/gost28147"
+	"github.com/ftomza/gogost/gost28147"
 )
 
 func TestHashInterface(t *testing.T) {

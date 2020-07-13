@@ -37,7 +37,6 @@ func main() {
 		fmt.Println(gogost.Version)
 		return
 	}
-
 	h := gost34112012256.New()
 	if _, err := io.Copy(h, os.Stdin); err != nil {
 		panic(err)

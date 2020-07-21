@@ -24,6 +24,9 @@ GOST is GOvernment STandard of Russian Federation (and Soviet Union).
 * PRF_IPSEC_PRFPLUS_GOSTR3411_2012_{256,512} and generic prf+ functions
   (Р 50.1.111-2016 with IKEv2 RFC 7296)
 
+Probably you could be interested in
+Go's support of GOST TLS 1.3 (http://gostls13.cypherpunks.ru/).
+
 Known problems:
 
 * intermediate calculation values are not zeroed

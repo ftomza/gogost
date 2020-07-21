@@ -1,7 +1,7 @@
 @node Download
 @unnumbered Download
 
-@set VERSION 4.2.3
+@set VERSION 4.2.4
 
 Preferable way is to download tarball with the signature from
 website and, for example, run tests with benchmarks:
@@ -11,9 +11,20 @@ $ [fetch|wget] http://gogost.cypherpunks.ru/gogost-@value{VERSION}.tar.xz
 $ [fetch|wget] http://gogost.cypherpunks.ru/gogost-@value{VERSION}.tar.xz.sig
 $ gpg --verify gogost-@value{VERSION}.tar.xz.sig gogost-@value{VERSION}.tar.xz
 $ xz --decompress --stdout gogost-@value{VERSION}.tar.xz | tar xf -
-$ make -C gogost-@value{VERSION} all bench
-$ echo hello world | gogost-@value{VERSION}/streebog256
+$ cd gogost-@value{VERSION}
+$ redo bench
+$ redo all
+$ echo hello world | ./streebog256
 f72018189a5cfb803dbe1f2149cf554c40093d8e7f81c21e08ac5bcd09d9934d
+@end example
+
+It uses @url{http://cr.yp.to/redo.html, redo} build system for that
+examples. You can use either dozen of various implementations, or at
+least minimalistic POSIX shell @code{apenwarr/do}:
+
+@example
+$ [fetch|wget] https://github.com/apenwarr/redo/raw/master/minimal/do
+$ mv do redo ; chmod +x redo
 @end example
 
 @include download.texi
@@ -83,13 +94,11 @@ GoGOST is also @command{go get}-able. For example to use
 $ go get go.cypherpunks.ru/gogost/cmd/streebog256
 @end example
 
-@code{go.cypherpunks.ru} uses @url{https://www.cacert.org/, CACert.org}
-certificate authority, that is not included by default in some operating
-system distributions and probably you have to install it in your system,
-because @command{go get} uses HTTPS connections. If you have issues
-using either @code{sum.golang.org} or @code{proxy.golang.org}, then you
-can disable their usage with @env{GOPRIVATE=go.cypherpunks.ru/gogost}
-environment variable.
+@code{go.cypherpunks.ru} uses @url{http://ca.cypherpunks.ru/, ca.cypherpunks.ru}
+certificate authority. If you have issues using either
+@code{sum.golang.org} or @code{proxy.golang.org}, then you can disable
+their usage with @env{GOPRIVATE=go.cypherpunks.ru/gogost} environment
+variable.
 
 Also you can use @code{replace} feature inside your @file{go.mod}, like:
 

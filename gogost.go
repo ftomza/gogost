@@ -1,6 +1,4 @@
 // Pure Go GOST cryptographic functions library.
 package gogost
 
-var (
-	Version string = "UNKNOWN"
-)
+const Version = "5.0.2"

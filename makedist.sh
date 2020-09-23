@@ -5,11 +5,12 @@ tmp=$(mktemp -d)
 release=$1
 [ -n "$release" ]
 
-redo-ifchange module-name streebog256
-mod_name=`cat module-name`
+redo-ifchange streebog256
 git clone . $tmp/gogost-$release
 cd $tmp/gogost-$release
 git checkout v$release
+redo module-name VERSION
+mod_name=`cat module-name`
 
 crypto_mod_path=$(sed -n 's#^require \(golang.org/x/crypto\) \(.*\)$#\1@\2#p' go.mod)
 mkdir -p src/$mod_name
@@ -26,9 +27,10 @@ mv \
     prfplus \
     cmd internal gogost.go go.mod go.sum src/$mod_name
 
-rm module-name.do clean.do
 echo $mod_name > module-name
 find . -name "*.do" -exec perl -i -npe "s/^go/GOPATH=\`pwd\` go/" {} \;
+mkdir contrib
+cp ~/work/redo/minimal/do contrib/do
 
 mkdir -p src/golang.org/x/crypto
 ( cd $GOPATH/pkg/mod/$crypto_mod_path ; \
@@ -37,7 +39,7 @@ mkdir -p src/golang.org/x/crypto
 
 cat > download.texi <<EOF
 You can obtain releases source code prepared tarballs on
-@url{http://gogost.cypherpunks.ru/}.
+@url{http://www.gogost.cypherpunks.ru/}.
 EOF
 
 texi=$(mktemp)
@@ -48,8 +50,7 @@ cat > $texi <<EOF
 @include install.texi
 @bye
 EOF
-makeinfo --plaintext -o INSTALL $texi
-rm $texi
+mkinfo --output INSTALL $texi
 
 cat > $texi <<EOF
 \input texinfo
@@ -58,7 +59,7 @@ cat > $texi <<EOF
 @include news.texi
 @bye
 EOF
-makeinfo --plaintext -o NEWS $texi
+mkinfo --output NEWS $texi
 
 cat > $texi <<EOF
 \input texinfo
@@ -67,10 +68,21 @@ cat > $texi <<EOF
 @include faq.texi
 @bye
 EOF
-makeinfo --plaintext -o FAQ $texi
+mkinfo --output FAQ $texi
 
 find . -name .git -type d | xargs rm -fr
-rm -f *.texi www.do style.css makedist.sh TODO .gitignore
+rm -fr .redo
+rm -f \
+    $texi \
+    *.texi \
+    .gitignore \
+    clean.do \
+    makedist.sh \
+    module-name.do \
+    style.css \
+    TODO \
+    VERSION.do \
+    www.do
 
 find . -type d -exec chmod 755 {} \;
 find . -type f -exec chmod 644 {} \;
@@ -109,12 +121,12 @@ The main improvements for that release are:
 
 ------------------------ >8 ------------------------
 
-GoGOST'es home page is: http://gogost.cypherpunks.ru/
+GoGOST'es home page is: http://www.gogost.cypherpunks.ru/
 
 Source code and its signature for that version can be found here:
 
-    http://gogost.cypherpunks.ru/gogost-${release}.tar.xz ($size KiB)
-    http://gogost.cypherpunks.ru/gogost-${release}.tar.xz.sig
+    http://www.gogost.cypherpunks.ru/gogost-${release}.tar.xz ($size KiB)
+    http://www.gogost.cypherpunks.ru/gogost-${release}.tar.xz.sig
 
 Streebog-256 hash: $hashsb
 SHA256 hash: $hash
@@ -141,12 +153,12 @@ GoGOST это свободное программное обеспечение �
 
 ------------------------ >8 ------------------------
 
-Домашняя страница GoGOST: http://gogost.cypherpunks.ru/
+Домашняя страница GoGOST: http://www.gogost.cypherpunks.ru/
 
 Исходный код и его подпись для этой версии могут быть найдены здесь:
 
-    http://gogost.cypherpunks.ru/gogost-${release}.tar.xz ($size KiB)
-    http://gogost.cypherpunks.ru/gogost-${release}.tar.xz.sig
+    http://www.gogost.cypherpunks.ru/gogost-${release}.tar.xz ($size KiB)
+    http://www.gogost.cypherpunks.ru/gogost-${release}.tar.xz.sig
 
 Streebog-256 хэш: $hashsb
 SHA256 хэш: $hash

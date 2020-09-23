@@ -59,7 +59,7 @@ func TestRFCVectors(t *testing.T) {
 	}
 
 	c := CurveIdGostR34102001TestParamSet()
-	prv, err := NewPrivateKey(c, Mode2001, priv)
+	prv, err := NewPrivateKey(c, priv)
 	if err != nil {
 		t.FailNow()
 	}
@@ -90,11 +90,7 @@ func TestRFCVectors(t *testing.T) {
 func TestRandom2001(t *testing.T) {
 	c := CurveIdGostR34102001TestParamSet()
 	f := func(data [31]byte, digest [32]byte) bool {
-		prv, err := NewPrivateKey(
-			c,
-			Mode2001,
-			append([]byte{0xde}, data[:]...),
-		)
+		prv, err := NewPrivateKey(c, append([]byte{0xde}, data[:]...))
 		if err != nil {
 			return false
 		}
@@ -103,7 +99,7 @@ func TestRandom2001(t *testing.T) {
 			return false
 		}
 		pubRaw := pub.Raw()
-		pub, err = NewPublicKey(c, Mode2001, pubRaw)
+		pub, err = NewPublicKey(c, pubRaw)
 		if err != nil {
 			return false
 		}
@@ -124,7 +120,7 @@ func TestRandom2001(t *testing.T) {
 
 func BenchmarkSign2001(b *testing.B) {
 	c := CurveIdGostR34102001TestParamSet()
-	prv, err := GenPrivateKey(c, Mode2001, rand.Reader)
+	prv, err := GenPrivateKey(c, rand.Reader)
 	if err != nil {
 		b.FailNow()
 	}
@@ -138,7 +134,7 @@ func BenchmarkSign2001(b *testing.B) {
 
 func BenchmarkVerify2001(b *testing.B) {
 	c := CurveIdGostR34102001TestParamSet()
-	prv, err := GenPrivateKey(c, Mode2001, rand.Reader)
+	prv, err := GenPrivateKey(c, rand.Reader)
 	if err != nil {
 		b.FailNow()
 	}
@@ -160,9 +156,9 @@ func BenchmarkVerify2001(b *testing.B) {
 
 func TestPrvEqualsTo1(t *testing.T) {
 	c := CurveIdGostR34102001TestParamSet()
-	prvRaw := make([]byte, int(Mode2001))
+	prvRaw := make([]byte, 32)
 	prvRaw[len(prvRaw)-1] = 1
-	prv, err := NewPrivateKey(c, Mode2001, prvRaw)
+	prv, err := NewPrivateKey(c, prvRaw)
 	if err != nil {
 		t.FailNow()
 	}

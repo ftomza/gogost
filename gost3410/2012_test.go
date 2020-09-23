@@ -57,7 +57,7 @@ func TestStdVector1(t *testing.T) {
 		0x92, 0x80, 0x14, 0xF6, 0xC5, 0xBF, 0x9C, 0x40,
 	}
 	reverse(prvRaw)
-	prv, err := NewPrivateKey(CurveIdGostR34102001TestParamSet(), Mode2001, prvRaw)
+	prv, err := NewPrivateKey(CurveIdGostR34102001TestParamSet(), prvRaw)
 	if err != nil {
 		t.FailNow()
 	}
@@ -126,6 +126,7 @@ func TestStdVector2(t *testing.T) {
 		}),
 		nil,
 		nil,
+		nil,
 	)
 	if err != nil {
 		t.FailNow()
@@ -181,7 +182,7 @@ func TestStdVector2(t *testing.T) {
 		0x2A, 0x98, 0x53, 0xBD, 0xE7, 0x3E, 0x5B, 0x4A,
 	}
 	reverse(prvRaw)
-	prv, err := NewPrivateKey(c, Mode2012, prvRaw)
+	prv, err := NewPrivateKey(c, prvRaw)
 	if err != nil {
 		t.FailNow()
 	}
@@ -322,11 +323,12 @@ func TestGCL3Vectors(t *testing.T) {
 		bytes2big(y),
 		nil,
 		nil,
+		nil,
 	)
 	if err != nil {
 		t.FailNow()
 	}
-	prv, err := NewPrivateKey(c, Mode2012, priv)
+	prv, err := NewPrivateKey(c, priv)
 	if err != nil {
 		t.FailNow()
 	}
@@ -357,11 +359,7 @@ func TestGCL3Vectors(t *testing.T) {
 func TestRandom2012(t *testing.T) {
 	c := CurveIdtc26gost341012512paramSetA()
 	f := func(prvRaw [64 - 1]byte, digest [64]byte) bool {
-		prv, err := NewPrivateKey(
-			c,
-			Mode2012,
-			append([]byte{0xde}, prvRaw[:]...),
-		)
+		prv, err := NewPrivateKey(c, append([]byte{0xde}, prvRaw[:]...))
 		if err != nil {
 			return false
 		}
@@ -370,7 +368,7 @@ func TestRandom2012(t *testing.T) {
 			return false
 		}
 		pubRaw := pub.Raw()
-		pub, err = NewPublicKey(c, Mode2012, pubRaw)
+		pub, err = NewPublicKey(c, pubRaw)
 		if err != nil {
 			return false
 		}
@@ -580,7 +578,7 @@ func TestUVXYConversion(t *testing.T) {
 
 func BenchmarkSign2012(b *testing.B) {
 	c := CurveIdtc26gost341012512paramSetA()
-	prv, err := GenPrivateKey(c, Mode2012, rand.Reader)
+	prv, err := GenPrivateKey(c, rand.Reader)
 	if err != nil {
 		b.FailNow()
 	}
@@ -594,7 +592,7 @@ func BenchmarkSign2012(b *testing.B) {
 
 func BenchmarkVerify2012(b *testing.B) {
 	c := CurveIdtc26gost341012512paramSetA()
-	prv, err := GenPrivateKey(c, Mode2012, rand.Reader)
+	prv, err := GenPrivateKey(c, rand.Reader)
 	if err != nil {
 		b.FailNow()
 	}

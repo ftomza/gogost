@@ -29,8 +29,8 @@ func TestVKO2001(t *testing.T) {
 	prvRaw1, _ := hex.DecodeString("1df129e43dab345b68f6a852f4162dc69f36b2f84717d08755cc5c44150bf928")
 	prvRaw2, _ := hex.DecodeString("5b9356c6474f913f1e83885ea0edd5df1a43fd9d799d219093241157ac9ed473")
 	kek, _ := hex.DecodeString("ee4618a0dbb10cb31777b4b86a53d9e7ef6cb3e400101410f0c0f2af46c494a6")
-	prv1, _ := NewPrivateKey(c, Mode2001, prvRaw1)
-	prv2, _ := NewPrivateKey(c, Mode2001, prvRaw2)
+	prv1, _ := NewPrivateKey(c, prvRaw1)
+	prv2, _ := NewPrivateKey(c, prvRaw2)
 	pub1, _ := prv1.PublicKey()
 	pub2, _ := prv2.PublicKey()
 	kek1, _ := prv1.KEK2001(pub2, ukm)
@@ -46,11 +46,11 @@ func TestVKO2001(t *testing.T) {
 func TestRandomVKO2001(t *testing.T) {
 	c := CurveIdGostR34102001TestParamSet()
 	f := func(prvRaw1 [32]byte, prvRaw2 [32]byte, ukmRaw [8]byte) bool {
-		prv1, err := NewPrivateKey(c, Mode2001, prvRaw1[:])
+		prv1, err := NewPrivateKey(c, prvRaw1[:])
 		if err != nil {
 			return false
 		}
-		prv2, err := NewPrivateKey(c, Mode2001, prvRaw2[:])
+		prv2, err := NewPrivateKey(c, prvRaw2[:])
 		if err != nil {
 			return false
 		}

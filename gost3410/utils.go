@@ -32,3 +32,10 @@ func reverse(d []byte) {
 func pad(d []byte, size int) []byte {
 	return append(make([]byte, size-len(d)), d...)
 }
+
+func PointSize(p *big.Int) int {
+	if p.BitLen() > 256 {
+		return 64
+	}
+	return 32
+}

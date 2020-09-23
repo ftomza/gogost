@@ -3,6 +3,17 @@
 
 @table @strong
 
+@anchor{Release 5.0.0}
+@item 5.0.0
+    Backward incompatible remove of excess misleading @code{gost3410.Mode}
+    from all related functions. Point/key sizes are determined by
+    looking at curve's parameters size.
+
+@anchor{Release 4.3.0}
+@item 4.3.0
+    @strong{Fixed} nasty bug with Edwards curves using in 34.10-VKO
+    functions: curve's cofactor has not been used.
+
 @anchor{Release 4.2.4}
 @item 4.2.4
     @code{gost3410.PrivateKeyReverseDigest} reversed digests and

@@ -24,16 +24,16 @@ import (
 )
 
 type PrivateKey struct {
-	C    *Curve
-	Mode Mode
-	Key  *big.Int
+	C   *Curve
+	Key *big.Int
 }
 
-func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
-	if len(raw) != int(mode) {
-		return nil, fmt.Errorf("gogost/gost3410: len(key) != %d", mode)
+func NewPrivateKey(curve *Curve, raw []byte) (*PrivateKey, error) {
+	pointSize := curve.PointSize()
+	if len(raw) != pointSize {
+		return nil, fmt.Errorf("gogost/gost3410: len(key) != %d", pointSize)
 	}
-	key := make([]byte, int(mode))
+	key := make([]byte, pointSize)
 	for i := 0; i < len(key); i++ {
 		key[i] = raw[len(raw)-i-1]
 	}
@@ -41,19 +41,19 @@ func NewPrivateKey(curve *Curve, mode Mode, raw []byte) (*PrivateKey, error) {
 	if k.Cmp(zero) == 0 {
 		return nil, errors.New("gogost/gost3410: zero private key")
 	}
-	return &PrivateKey{curve, mode, k}, nil
+	return &PrivateKey{curve, k}, nil
 }
 
-func GenPrivateKey(curve *Curve, mode Mode, rand io.Reader) (*PrivateKey, error) {
-	raw := make([]byte, int(mode))
+func GenPrivateKey(curve *Curve, rand io.Reader) (*PrivateKey, error) {
+	raw := make([]byte, curve.PointSize())
 	if _, err := io.ReadFull(rand, raw); err != nil {
 		return nil, err
 	}
-	return NewPrivateKey(curve, mode, raw)
+	return NewPrivateKey(curve, raw)
 }
 
 func (prv *PrivateKey) Raw() []byte {
-	raw := pad(prv.Key.Bytes(), int(prv.Mode))
+	raw := pad(prv.Key.Bytes(), prv.C.PointSize())
 	reverse(raw)
 	return raw
 }
@@ -63,7 +63,7 @@ func (prv *PrivateKey) PublicKey() (*PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &PublicKey{prv.C, prv.Mode, x, y}, nil
+	return &PublicKey{prv.C, x, y}, nil
 }
 
 func (prv *PrivateKey) SignDigest(digest []byte, rand io.Reader) ([]byte, error) {
@@ -72,7 +72,7 @@ func (prv *PrivateKey) SignDigest(digest []byte, rand io.Reader) ([]byte, error)
 	if e.Cmp(zero) == 0 {
 		e = big.NewInt(1)
 	}
-	kRaw := make([]byte, int(prv.Mode))
+	kRaw := make([]byte, prv.C.PointSize())
 	var err error
 	var k *big.Int
 	var r *big.Int
@@ -102,9 +102,10 @@ Retry:
 	if s.Cmp(zero) == 0 {
 		goto Retry
 	}
+	pointSize := prv.C.PointSize()
 	return append(
-		pad(s.Bytes(), int(prv.Mode)),
-		pad(r.Bytes(), int(prv.Mode))...,
+		pad(s.Bytes(), pointSize),
+		pad(r.Bytes(), pointSize)...,
 	), nil
 }
 

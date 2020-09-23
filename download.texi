@@ -1,6 +1,31 @@
 @multitable {XXXXX} {XXXX-XX-XX} {XXXX KiB} {link sign} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx} {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
 @headitem Version @tab Date @tab Size @tab Tarball @tab SHA256 checksum @tab Streebog-256 checksum
 
+@item 5.0.2 @tab 2020-09-05 @tab 62 KiB
+@tab @url{gogost-5.0.2.tar.xz, link} @url{gogost-5.0.2.tar.xz.sig, sign}
+@tab @code{2A62D4B8 B45CBD6D EFF8DD2A 973F16B3 463F8365 467408A0 2DD538F9 0EFD0B69}
+@tab @code{0dd8ed5b0cfae0b8ad30658dab3e12188c005a590db0a698731fb85dcec679c4}
+
+@item 5.0.1 @tab 2020-09-05 @tab 62 KiB
+@tab @url{gogost-5.0.1.tar.xz, link} @url{gogost-5.0.1.tar.xz.sig, sign}
+@tab @code{4DAEA73C 44527737 054C659A 9B619A21 643EA3AA 66F6E092 4AC8777A 5D897C6A}
+@tab @code{0bde87f569e0dbad29856610dcbd2ffbcaca4f4899046cb138d92b059856b4b2}
+
+@item @ref{Release 5.0.0, 5.0.0} @tab 2020-09-04 @tab 62 KiB
+@tab @url{gogost-5.0.0.tar.xz, link} @url{gogost-5.0.0.tar.xz.sig, sign}
+@tab @code{222CB86E 559E9CCF E80FFFB1 B3A7908B A978FE84 9E12B7F9 DA571512 6A24BCA7}
+@tab @code{2a0fc616372fe905e8677e1e82d8bd82f852e6393c03cbfb34f69f855bcbfc85}
+
+@item 4.3.1 @tab 2020-09-01 @tab 63 KiB
+@tab @url{gogost-4.3.1.tar.xz, link} @url{gogost-4.3.1.tar.xz.sig, sign}
+@tab @code{FEB48FAA 49F43FB4 6FF4812C ECB9BD8B 077EA3A1 693088CA 1C2F29E8 F2AFE500}
+@tab @code{785b17e7f84f3b472d5bdcb710e124908da656bdec2df7f6bcf0a1b4042403ce}
+
+@item @ref{Release 4.3.0, 4.3.0} @tab 2020-08-02 @tab 58 KiB
+@tab @url{gogost-4.3.0.tar.xz, link} @url{gogost-4.3.0.tar.xz.sig, sign}
+@tab @code{B5550996 57149869 46F01316 937CA4E2 C0786F90 F0281E59 FD3E4D0B 633785EC}
+@tab @code{e5a187c1e9753b747918a13008f128efa0b9fbc8f2b26ef8af1315a53ac8b8ba}
+
 @item @ref{Release 4.2.4, 4.2.4} @tab 2020-06-24 @tab 58 KiB
 @tab @url{gogost-4.2.4.tar.xz, link} @url{gogost-4.2.4.tar.xz.sig, sign}
 @tab @code{AB7716CB B1E67C5F 5F38B4F9 EEE2733E 931A0498 084AF7BC E816F961 16EB26AE}

@@ -1,7 +1,7 @@
-##Pure Go GOST cryptographic functions library.
+## Pure Go GOST cryptographic functions library.
 
-###Fork of original gogost project https://git.cypherpunks.ru/cgit.cgi/gogost.git
-####GOST is GOvernment STandard of Russian Federation (and Soviet Union).
+### Fork of original gogost project https://git.cypherpunks.ru/cgit.cgi/gogost.git
+#### GOST is GOvernment STandard of Russian Federation (and Soviet Union).
 
 * GOST 28147-89 (RFC 5830) block cipher with ECB, CNT (CTR), CFB, MAC
   CBC (RFC 4357) modes of operation
@@ -28,12 +28,12 @@
 Probably you could be interested in
 Go's support of GOST TLS 1.3 (http://www.gostls13.cypherpunks.ru/).
 
-####Known problems:
+#### Known problems:
 
 * intermediate calculation values are not zeroed
 * 34.10 is not time constant and slow
 
-#####Example 34.10-2012-256 keypair generation, signing and verifying:
+##### Example 34.10-2012-256 keypair generation, signing and verifying:
 
     import (
         "crypto/rand"
